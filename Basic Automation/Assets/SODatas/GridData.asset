@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6fc0626ec86ff47a7d66f4d1e36e07, type: 3}
+  m_Name: GridData
+  m_EditorClassIdentifier: Assembly-CSharp::GridData
+  entries:
+  - position: {x: 1, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
