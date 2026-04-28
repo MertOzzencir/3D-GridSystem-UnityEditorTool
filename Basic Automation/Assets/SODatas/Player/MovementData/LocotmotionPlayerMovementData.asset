@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e00fb472094b1614e8819dc37b746cb1, type: 3}
-  m_Name: PlayerMovementData
+  m_Name: LocotmotionPlayerMovementData
   m_EditorClassIdentifier: Assembly-CSharp::LocomotionSO
   MaxForce: 6
   Acceleration: 90
@@ -66,7 +66,7 @@ MonoBehaviour:
   ForceScale: {x: 1, y: 0, z: 1}
   UprightCorrectionStrength: 700
   UprightCorrectionDamper: 100
-  RideHeight: 2
+  RideHeight: 1
   RideSpringStrength: 6000
   RideSpringDamper: 1050
   RideHeightMultiplier: 0

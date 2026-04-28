@@ -52,3 +52,219 @@ MonoBehaviour:
   - position: {x: 5, y: 0, z: 2}
     IsFull: 0
     OccupiedBy: 
+  - position: {x: 2, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 10}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 12}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 11}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 10}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 9}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 5, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 6, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 9}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 9, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 7, y: 0, z: 9}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 8, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 3, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 4, y: 0, z: 9}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 9}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 2, y: 0, z: 8}
+    IsFull: 0
+    OccupiedBy: 

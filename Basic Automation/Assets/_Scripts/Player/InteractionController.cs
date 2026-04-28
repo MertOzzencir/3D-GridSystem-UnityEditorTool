@@ -1,43 +1,78 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
 
+    public event Action<InteractState> OnInteract;
 
-    [SerializeField] private float tempToolCoolDown = 0.5f;
     private Collider[] FreeAllocSphereCheck = new Collider[10];
-    private float lastHitTime;
     private DistanceComparer distanceComparer = new DistanceComparer();
+    private PlayerLocomotionController movementController;
+    void Awake()
+    {
+        movementController = GetComponent<PlayerLocomotionController>();
+    }
+    private void ReadyToInteract(bool state)
+    {
+        if (state)
+        {
+            OnInteract?.Invoke(InteractState.InteractReady);
+            movementController.HorizontalMovementStateChange(false);
+        }
+        else
+        {
+            OnInteract?.Invoke(InteractState.InteractReadyNegative);
+            movementController.HorizontalMovementStateChange(true);
+        }
+
+    }
     private void Interact(bool obj)
     {
-        if (Time.time <= lastHitTime + tempToolCoolDown) return;
-        int hitCount = Physics.OverlapSphereNonAlloc(transform.position, 2f, FreeAllocSphereCheck);
-        distanceComparer.origin = transform.position;
-        System.Array.Sort(FreeAllocSphereCheck, 0, hitCount, distanceComparer);
-
-        for (int i = 0; i < hitCount; i++)
+        if (obj)
         {
-            if (FreeAllocSphereCheck[i].TryGetComponent(out IInteractable interact))
+            OnInteract?.Invoke(InteractState.InteractCharge);
+            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, 2f, FreeAllocSphereCheck);
+            distanceComparer.origin = transform.position;
+            System.Array.Sort(FreeAllocSphereCheck, 0, hitCount, distanceComparer);
+
+            for (int i = 0; i < hitCount; i++)
             {
-                Vector3 lookDirection = (interact.GetTransform().position - transform.position).normalized;
-                lookDirection.y = 0;
-                if (Vector3.Dot(transform.forward, lookDirection) > .4f)
+                if (FreeAllocSphereCheck[i].TryGetComponent(out IInteractable interact))
                 {
-                    lastHitTime = Time.time;
-                    interact.Interact();
+                    Vector3 lookDirection = (interact.GetTransform().position - transform.position).normalized;
+                    lookDirection.y = 0;
+                    if (Vector3.Dot(transform.forward, lookDirection) > .4f)
+                    {
+                        interact.Interact();
+                    }
+                    break;
                 }
-                break;
             }
         }
+        else
+        {
+            OnInteract?.Invoke(InteractState.InteractChargeNegative);
+        }
+
     }
     void OnEnable()
     {
-        InputManager.OnRightClick += Interact;
+        InputManager.OnLeftClick += Interact;
+        InputManager.OnRightClick += ReadyToInteract;
     }
     void OnDisable()
     {
-        InputManager.OnRightClick -= Interact;
+        InputManager.OnLeftClick -= Interact;
+        InputManager.OnRightClick -= ReadyToInteract;
     }
+}
+public enum InteractState
+{
+    Idle,
+    InteractReady,
+    InteractReadyNegative,
+    InteractCharge,
+    InteractChargeNegative,
+    Interact
 }
