@@ -201,7 +201,7 @@ Mathf.FloorToInt(placeable.transform.position.z + z)
 
 
             Placeable instance = (Placeable)PrefabUtility.InstantiatePrefab(placeable);
-            instance.transform.position = new Vector3(pos.x + .1f, pos.y, pos.z + .15f);
+            instance.transform.position = new Vector3(pos.x, pos.y, pos.z);
             instance.transform.SetParent(parent);
             instance.name = $"Placeable_{spawnedGrid.position.x}_{spawnedGrid.position.z}";
             foreach (var a in checkedGrids)

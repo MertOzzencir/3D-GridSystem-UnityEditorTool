@@ -20,14 +20,14 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 3, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_3_0
   - position: {x: 4, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_4_0
   - position: {x: 5, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_5_0
   - position: {x: 2, y: 0, z: 1}
     IsFull: 0
     OccupiedBy: 
@@ -68,23 +68,23 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 7, y: 0, z: 2}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_7_2
   - position: {x: 7, y: 0, z: 1}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_7_1
   - position: {x: 6, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_6_0
   - position: {x: 9, y: 0, z: 3}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_3
   - position: {x: 9, y: 0, z: 5}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_5
   - position: {x: 9, y: 0, z: 7}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_7
   - position: {x: 8, y: 0, z: 10}
     IsFull: 0
     OccupiedBy: 
@@ -98,11 +98,11 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 6, y: 0, z: 9}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_6_9
   - position: {x: 5, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_5_8
   - position: {x: 3, y: 0, z: 7}
     IsFull: 0
     OccupiedBy: 
@@ -110,8 +110,8 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 1, y: 0, z: 6}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_1_6
   - position: {x: 0, y: 0, z: 5}
     IsFull: 0
     OccupiedBy: 
@@ -134,8 +134,8 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 6, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_6_8
   - position: {x: 7, y: 0, z: 8}
     IsFull: 0
     OccupiedBy: 
@@ -197,8 +197,8 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 6, y: 0, z: 1}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_6_1
   - position: {x: 7, y: 0, z: 4}
     IsFull: 0
     OccupiedBy: 
@@ -206,11 +206,11 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 8, y: 0, z: 3}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_8_3
   - position: {x: 8, y: 0, z: 2}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_8_2
   - position: {x: 8, y: 0, z: 5}
     IsFull: 0
     OccupiedBy: 
@@ -218,17 +218,17 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 8, y: 0, z: 9}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_8_9
   - position: {x: 8, y: 0, z: 4}
     IsFull: 0
     OccupiedBy: 
   - position: {x: 9, y: 0, z: 4}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_4
   - position: {x: 9, y: 0, z: 6}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_6
   - position: {x: 8, y: 0, z: 6}
     IsFull: 0
     OccupiedBy: 
@@ -236,35 +236,113 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 9, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_9_8
   - position: {x: 7, y: 0, z: 9}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_7_9
   - position: {x: 8, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_8_8
   - position: {x: 4, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_4_8
   - position: {x: 3, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_3_8
   - position: {x: 4, y: 0, z: 9}
     IsFull: 0
     OccupiedBy: 
   - position: {x: 1, y: 0, z: 8}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_1_8
   - position: {x: 1, y: 0, z: 7}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_1_7
   - position: {x: 0, y: 0, z: 6}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_0_6
   - position: {x: 2, y: 0, z: 9}
     IsFull: 0
     OccupiedBy: 
   - position: {x: 2, y: 0, z: 8}
+    IsFull: 1
+    OccupiedBy: Placeable_2_8
+  - position: {x: 1, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 1, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: 0, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 0}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -3, y: 0, z: 2}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -3, y: 0, z: 4}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -3, y: 0, z: 3}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 5}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 6}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -1, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 7}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -3, y: 0, z: 1}
+    IsFull: 0
+    OccupiedBy: 
+  - position: {x: -2, y: 0, z: 0}
     IsFull: 0
     OccupiedBy: 

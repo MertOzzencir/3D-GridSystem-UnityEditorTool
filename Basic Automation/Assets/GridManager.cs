@@ -59,45 +59,47 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Vector3 playerPos = player.transform.position;
-        Vector3Int snappedPos = SnappedPosition(playerPos);
-        GridDictData selectedData = GetGridData(snappedPos);
-        if (selectedData == null) return;
-        if (selectedData.Placeable != null) return;
-        GameObject selectedGrid = GetGridGameObject(selectedData);
+    // void Update()
+    // {
+    //     Vector3 playerPos = player.transform.position;
+    //     Vector3Int snappedPos = SnappedPosition(playerPos);
+    //     //snappedPos.y = Mathf.FloorToInt(playerPos.y);
+    //     GridDictData selectedData = GetGridData(playerPos);
 
-        if (selectedGrid == null)
-        {
-            if (currentGrid != null)
-            {
-                if (gridDownAnim != null) StopCoroutine(gridDownAnim);
-                if (gridUpAnim != null) StopCoroutine(gridUpAnim);
-                gridUpAnim = StartCoroutine(GridVerticalOffSetAnimation(currentGrid.transform, currentPos));
-                currentGrid = null;
-            }
-            return;
-        }
+    //     if (selectedData == null)
+    //     {
+    //         Debug.Log("Found?");
+    //         if (currentGrid != null)
+    //         {
+    //             if (gridDownAnim != null) StopCoroutine(gridDownAnim);
+    //             if (gridUpAnim != null) StopCoroutine(gridUpAnim);
+    //             gridUpAnim = StartCoroutine(GridVerticalOffSetAnimation(currentGrid.transform, currentPos));
+    //             currentGrid = null;
+    //         }
+    //         return;
+    //     }
 
-        if (selectedGrid != currentGrid)
-        {
-            if (currentGrid != null)
-            {
-                if (gridUpAnim != null) StopCoroutine(gridUpAnim);
-                gridUpAnim = StartCoroutine(GridVerticalOffSetAnimation(currentGrid.transform, currentPos));
-            }
+    //     if (selectedData.Placeable != null) return;
+    //     GameObject selectedGrid = GetGridGameObject(selectedData);
 
-            currentGrid = selectedGrid;
-            currentPos = snappedPos;
+    //     if (selectedGrid != currentGrid)
+    //     {
+    //         if (currentGrid != null)
+    //         {
+    //             if (gridUpAnim != null) StopCoroutine(gridUpAnim);
+    //             gridUpAnim = StartCoroutine(GridVerticalOffSetAnimation(currentGrid.transform, currentPos));
+    //         }
 
-            if (gridDownAnim != null) StopCoroutine(gridDownAnim);
-            gridDownAnim = StartCoroutine(GridVerticalOffSetAnimation(
-                currentGrid.transform,
-                snappedPos + Vector3.down * 0.2f)
-            );
-        }
-    }
+    //         currentGrid = selectedGrid;
+    //         currentPos = snappedPos;
+
+    //         if (gridDownAnim != null) StopCoroutine(gridDownAnim);
+    //         gridDownAnim = StartCoroutine(GridVerticalOffSetAnimation(
+    //             currentGrid.transform,
+    //             snappedPos + Vector3.down * 0.2f)
+    //         );
+    //     }
+    // }
     public GridDictData GetFreeGrid(Vector3 origin, Vector3 size)
     {
         Vector3Int snapped = SnappedPosition(origin);

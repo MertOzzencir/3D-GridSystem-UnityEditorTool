@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DestructableLocalManager : Placeable
 {
+    public event Action<Animator, string> OnChildAnimation;
     List<Destructable> childDestructables;
     private void Awake()
     {
@@ -19,9 +21,9 @@ public class DestructableLocalManager : Placeable
         int _childHealth = child.GetHealth();
         _childHealth -= 1;
         child.SetHealth(_childHealth);
+        OnChildAnimation?.Invoke(child.GetAnimator(), child.CurrentAnimationName(0));
         if (_childHealth <= 0)
         {
-
             if (IsChildWeakPoint(child)) return;
 
             child.OnHit -= OnChildHit;
