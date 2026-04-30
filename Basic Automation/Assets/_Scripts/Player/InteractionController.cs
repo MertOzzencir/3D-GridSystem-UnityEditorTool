@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
@@ -6,22 +7,50 @@ public class InteractionController : MonoBehaviour
 
     public event Action<InteractState> OnInteract;
 
-    private Collider[] FreeAllocSphereCheck = new Collider[15];
-    private DistanceComparer distanceComparer = new DistanceComparer();
     private PlayerLocomotionController movementController;
+    private GlobalAnimationTrigger SubscribeAnimation;
+    InteractState currentState;
+    ICarryable currentCarryable;
     void Awake()
     {
+        currentState = InteractState.Idle;
+        SubscribeAnimation = GetComponentInChildren<GlobalAnimationTrigger>();
+        SubscribeAnimation.OnAnimationTrigger += OnInteractAnimation;
         movementController = GetComponent<PlayerLocomotionController>();
+        CarryableEvents.OnCarryable += CarryObject;
     }
+
+    private void CarryObject(ICarryable t)
+    {
+        bool sc = true;
+        if (currentCarryable != null)
+        {
+            currentCarryable.Drop(out sc);
+        }
+        if (sc)
+        {
+            currentCarryable = t;
+            currentCarryable.GetTransform().position = transform.position + Vector3.up * 2f;
+            currentCarryable.GetTransform().parent = transform;
+        }
+        else
+        {
+            currentCarryable.GetTransform().parent = transform.parent;
+        }
+
+    }
+
     private void ReadyToInteract(bool state)
     {
-        if (state)
+        if (state && currentState == InteractState.Idle)
         {
+            currentState = InteractState.InteractReady;
             OnInteract?.Invoke(InteractState.InteractReady);
             movementController.HorizontalMovementStateChange(false);
         }
         else
         {
+            currentState = InteractState.Idle;
             OnInteract?.Invoke(InteractState.InteractReadyNegative);
             movementController.HorizontalMovementStateChange(true);
         }
@@ -29,28 +58,10 @@ public class InteractionController : MonoBehaviour
     }
     private void Interact(bool obj)
     {
-        if (obj)
+        if (obj && currentState == InteractState.InteractReady)
         {
             OnInteract?.Invoke(InteractState.InteractCharge);
-            int hitCount = Physics.OverlapSphereNonAlloc(transform.position, 3f, FreeAllocSphereCheck, LayerMask.GetMask("Interactable"));
-            distanceComparer.origin = transform.position;
-            System.Array.Sort(FreeAllocSphereCheck, 0, hitCount, distanceComparer);
 
-            for (int i = 0; i < hitCount; i++)
-            {
-
-                Debug.Log(FreeAllocSphereCheck[i].name);
-                if (FreeAllocSphereCheck[i].TryGetComponent(out IInteractable interact))
-                {
-                    Vector3 lookDirection = (interact.GetTransform().position - transform.position).normalized;
-                    lookDirection.y = 0;
-                    if (Vector3.Dot(transform.forward, lookDirection) > .2f)
-                    {
-                        interact.Interact();
-                    }
-                    break;
-                }
-            }
         }
         else
         {
@@ -58,15 +69,68 @@ public class InteractionController : MonoBehaviour
         }
 
     }
+
+    private void Pickup()
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit) && currentCarryable == null)
+        {
+            if (hit.transform.TryGetComponent(out ICarryable carryable))
+            {
+                carryable.Carry();
+            }
+        }
+        else
+        {
+            if (currentCarryable != null)
+            {
+                currentCarryable.Drop(out bool sc);
+                if (sc)
+                {
+                    currentCarryable = null;
+                }
+                else
+                {
+                    currentCarryable.GetTransform().parent = transform;
+                }
+            }
+        }
+    }
+    private void OnInteractAnimation()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, 3f);
+
+        System.Array.Sort(hits, (a, b) =>
+            Vector3.Distance(a.transform.position, transform.position)
+            .CompareTo(Vector3.Distance(b.transform.position, transform.position)));
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].TryGetComponent(out IInteractable interact))
+            {
+                Vector3 lookDirection = (interact.GetTransform().position - transform.position).normalized;
+                lookDirection.y = 0;
+                if (Vector3.Dot(transform.forward, lookDirection) > .2f)
+                {
+                    interact.Interact();
+                }
+                break;
+            }
+        }
+    }
     void OnEnable()
     {
         InputManager.OnLeftClick += Interact;
         InputManager.OnRightClick += ReadyToInteract;
+        InputManager.OnPickup += Pickup;
     }
+
+
     void OnDisable()
     {
         InputManager.OnLeftClick -= Interact;
         InputManager.OnRightClick -= ReadyToInteract;
+        InputManager.OnPickup -= Pickup;
     }
 }
 public enum InteractState

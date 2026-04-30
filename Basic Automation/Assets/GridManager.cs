@@ -100,7 +100,7 @@ public class GridManager : MonoBehaviour
     //         );
     //     }
     // }
-    public GridDictData GetFreeGrid(Vector3 origin, Vector3 size)
+    public GridDictData GetOneFreeGrid(Vector3 origin, Vector3 size)
     {
         Vector3Int snapped = SnappedPosition(origin);
         for (int z = 0; z < size.y + 2; z++)
@@ -117,8 +117,28 @@ public class GridManager : MonoBehaviour
         }
         return default;
     }
-    public void AddOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject)
+    public List<GridDictData> GetPlaceableInRange(Vector3 origin, Vector3 size)
     {
+        Vector3Int snapped = SnappedPosition(origin);
+        List<GridDictData> tempGridDictData = new List<GridDictData>();
+        for (int z = 0; z < size.y + 2; z++)
+        {
+            for (int x = 0; x < size.x + 2; x++)
+            {
+                Vector3Int currentPos = snapped + new Vector3Int(-1 + x, 0, -1 + z);
+                GridDictData currentGrid = GetGridData(currentPos);
+                if (currentGrid != null && currentGrid.Placeable != null)
+                {
+                    tempGridDictData.Add(currentGrid);
+                }
+            }
+        }
+        return tempGridDictData;
+    }
+    public bool AddOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject, out bool success)
+    {
+        success = true;
+        List<GridDictData> temp = new List<GridDictData>();
         for (int z = 0; z < size.y; z++)
         {
             for (int x = 0; x < size.x; x++)
@@ -126,11 +146,30 @@ public class GridManager : MonoBehaviour
                 GridDictData grid = GetGridData(gridPos + new Vector3(x, 0, z));
                 if (grid != null && grid.Placeable == null)
                 {
-                    grid.Placeable = placeableObject;
+                    temp.Add(grid);
+                }
+                else
+                {
+                    success = false;
                 }
             }
         }
+        if (success)
+        {
+            int i = 0;
+            foreach (var a in temp)
+            {
+                if (i == 0)
+                {
+                    placeableObject.transform.position = WorldPositionFromGrid(a.Grid);
+                    placeableObject.transform.parent = a.Grid.transform;
+                    placeableObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                }
+                a.Placeable = placeableObject;
+            }
+        }
 
+        return success;
     }
     public void DeleteOnGrid(Vector3 pos, Vector3 size)
     {
@@ -162,6 +201,11 @@ public class GridManager : MonoBehaviour
     {
         pos.y = 0;
         return new Vector3Int(Mathf.FloorToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
+    }
+    public Vector3 WorldPositionFromGrid(GameObject grid)
+    {
+        Vector3 snapped = SnappedPosition(grid.transform.position);
+        return snapped + new Vector3(0, grid.transform.localScale.y, 0);
     }
 
     IEnumerator GridVerticalOffSetAnimation(Transform grid, Vector3 aimPosition)

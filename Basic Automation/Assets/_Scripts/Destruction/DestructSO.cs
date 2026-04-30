@@ -6,7 +6,6 @@ public class DestructSO : ScriptableObject
     public int Health;
     public int XPAmount;
     public DropBase DropGameObject;
-    public bool IsWeakPoint;
 
 
 }

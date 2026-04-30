@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public static event Action<bool> OnRightClick;
     public static event Action<bool> OnLeftClick;
     public static event Action<int> OnNumpadNumber;
+    public static event Action OnPickup;
     private InputBase inputBase;
 
 
@@ -38,10 +39,17 @@ public class InputManager : MonoBehaviour
         inputBase.Player.RightClick.canceled += OnRightClickAction;
         inputBase.Player.LeftClick.performed += OnLeftClickAction;
         inputBase.Player.LeftClick.canceled += OnLeftClickAction;
-        inputBase.Player.Numpads.performed += OnNumpads;
+        inputBase.Player.Numpads.performed += OnNumpadsAction;
+        inputBase.Player.Pickup.performed += OnPickupAction;
     }
 
-    private void OnNumpads(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    private void OnPickupAction(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        OnPickup?.Invoke();
+    }
+
+
+    private void OnNumpadsAction(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         if (int.TryParse(context.control.name, out int currentPad))
         {

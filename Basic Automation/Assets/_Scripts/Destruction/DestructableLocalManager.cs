@@ -2,19 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructableLocalManager : Placeable
+public class DestructableLocalManager : Placeable, ITriggerInput
 {
     public event Action<Animator, string> OnChildAnimation;
     List<Destructable> childDestructables;
     private void Awake()
     {
         childDestructables = new List<Destructable>(GetComponentsInChildren<Destructable>());
-        foreach (var a in childDestructables)
-        {
-            a.OnHit += OnChildHit;
-        }
+
     }
 
+    public void GetSignal()
+    {
+        if (childDestructables.Count > 0)
+        {
+            OnChildHit(childDestructables[0]);
+        }
+    }
     private void OnChildHit(Destructable child)
     {
         //Debug.Log("Destructable Manager handles child");
@@ -24,9 +28,6 @@ public class DestructableLocalManager : Placeable
         OnChildAnimation?.Invoke(child.GetAnimator(), child.CurrentAnimationName(0));
         if (_childHealth <= 0)
         {
-            if (IsChildWeakPoint(child)) return;
-
-            child.OnHit -= OnChildHit;
             childDestructables.Remove(child);
             SpawnDropFromChild(child.GetData().DropGameObject);
             Destroy(child.gameObject);
@@ -34,34 +35,18 @@ public class DestructableLocalManager : Placeable
         }
     }
 
-    private bool IsChildWeakPoint(Destructable child)
-    {
-        if (child.GetData().IsWeakPoint)
-        {
-            for (int i = 0; i < childDestructables.Count; i++)
-            {
-                Destructable currentChild = childDestructables[i];
-                currentChild.OnHit -= OnChildHit;
-                SpawnDropFromChild(child.GetData().DropGameObject);
-                Destroy(currentChild.gameObject);
-            }
-            childDestructables.Clear();
-            DestroySelfCheck();
-            return true;
-        }
-
-        return false;
-    }
     private void SpawnDropFromChild(DropBase child)
     {
         GridManager m = GridManager.Instance;
-        GameObject gridRef = m.GetGridGameObject(m.GetFreeGrid(transform.position, Size));
+        GameObject gridRef = m.GetGridGameObject(m.GetOneFreeGrid(transform.position, Size));
         Vector3Int freeSpawnPosition = new Vector3Int(Mathf.FloorToInt(gridRef.transform.position.x),
                                                       Mathf.FloorToInt(gridRef.transform.localScale.y),
                                                      Mathf.FloorToInt(gridRef.transform.position.z)
         );
         Placeable spawnedDrop = Instantiate(child, freeSpawnPosition, Quaternion.identity);
     }
+
+
 
     private void DestroySelfCheck()
     {
@@ -71,5 +56,4 @@ public class DestructableLocalManager : Placeable
             Destroy(gameObject);
         }
     }
-
 }

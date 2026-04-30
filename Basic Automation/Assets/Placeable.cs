@@ -11,7 +11,9 @@ public abstract class Placeable : MonoBehaviour
     }
     public void AddOnGrid()
     {
-        GridManager.Instance.AddOnGrid(transform.position, Size, this);
+        GridManager.Instance.AddOnGrid(transform.position, Size, this, out bool s);
+        if (!s)
+            Destroy(this.gameObject);
     }
     public void DeleteOnGrid()
     {

@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class Destructable : MonoBehaviour, IInteractable
+public class Destructable : MonoBehaviour
 {
     [SerializeField] private DestructSO data;
     [SerializeField] private string[] animationNames;
-    public event Action<Destructable> OnHit;
+   
     private int Health;
     private Animator anim;
     void Start()
@@ -13,12 +13,7 @@ public class Destructable : MonoBehaviour, IInteractable
         anim = GetComponent<Animator>();
         Health = data.Health;
     }
-    [ContextMenu("Interact")]
-
-    public void Interact()
-    {
-        OnHit?.Invoke(this);
-    }
+   
     public DestructSO GetData()
     {
         return data;

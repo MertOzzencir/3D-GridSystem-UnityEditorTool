@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GridData
   entries:
   - position: {x: 1, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_1_0
   - position: {x: 2, y: 0, z: 0}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_2_0
   - position: {x: 3, y: 0, z: 0}
     IsFull: 1
     OccupiedBy: Placeable_3_0
@@ -29,14 +29,14 @@ MonoBehaviour:
     IsFull: 1
     OccupiedBy: Placeable_5_0
   - position: {x: 2, y: 0, z: 1}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_2_1
   - position: {x: 3, y: 0, z: 1}
     IsFull: 0
     OccupiedBy: 
   - position: {x: 4, y: 0, z: 1}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_4_1
   - position: {x: 5, y: 0, z: 1}
     IsFull: 0
     OccupiedBy: 
@@ -53,8 +53,8 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 2, y: 0, z: 3}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_2_3
   - position: {x: 3, y: 0, z: 3}
     IsFull: 0
     OccupiedBy: 
@@ -62,8 +62,8 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 6, y: 0, z: 3}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_6_3
   - position: {x: 7, y: 0, z: 3}
     IsFull: 0
     OccupiedBy: 
@@ -113,14 +113,14 @@ MonoBehaviour:
     IsFull: 1
     OccupiedBy: Placeable_1_6
   - position: {x: 0, y: 0, z: 5}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_0_5
   - position: {x: -1, y: 0, z: 4}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_-1_4
   - position: {x: 0, y: 0, z: 4}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_0_4
   - position: {x: 1, y: 0, z: 5}
     IsFull: 0
     OccupiedBy: 
@@ -179,20 +179,20 @@ MonoBehaviour:
     IsFull: 0
     OccupiedBy: 
   - position: {x: 5, y: 0, z: 5}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_5_5
   - position: {x: 7, y: 0, z: 5}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_7_5
   - position: {x: 5, y: 0, z: 4}
     IsFull: 0
     OccupiedBy: 
   - position: {x: 3, y: 0, z: 4}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_3_4
   - position: {x: 5, y: 0, z: 3}
-    IsFull: 0
-    OccupiedBy: 
+    IsFull: 1
+    OccupiedBy: Placeable_5_3
   - position: {x: 6, y: 0, z: 2}
     IsFull: 0
     OccupiedBy: 
