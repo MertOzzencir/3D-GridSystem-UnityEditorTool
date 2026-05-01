@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
-
+    [SerializeField] private Transform pickupTransform;
     public event Action<InteractState> OnInteract;
 
     private PlayerLocomotionController movementController;
@@ -28,16 +28,9 @@ public class InteractionController : MonoBehaviour
             currentCarryable.Drop(out sc);
         }
         if (sc)
-        {
             currentCarryable = t;
-            currentCarryable.GetTransform().position = transform.position + Vector3.up * 2f;
-            currentCarryable.GetTransform().parent = transform;
-        }
-        else
-        {
-            currentCarryable.GetTransform().parent = transform.parent;
-        }
 
+        currentCarryable.GetTransform().parent = pickupTransform;
     }
 
     private void ReadyToInteract(bool state)
@@ -91,7 +84,7 @@ public class InteractionController : MonoBehaviour
                 }
                 else
                 {
-                    currentCarryable.GetTransform().parent = transform;
+                    currentCarryable.GetTransform().parent = pickupTransform;
                 }
             }
         }

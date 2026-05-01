@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003faba42195d0146b30155d37a71be2, type: 3}
   m_Name: WoodData
   m_EditorClassIdentifier: Assembly-CSharp::DropSO
-  DropType: 1
+  SourceName: Wood
+  Icon: {fileID: 1287649992867056945, guid: 6eaa9958d83ec43499e946a21edba283, type: 3}

@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     public static event Action<bool> OnLeftClick;
     public static event Action<int> OnNumpadNumber;
     public static event Action OnPickup;
+    public static event Action OnTab;
     private InputBase inputBase;
 
 
@@ -41,7 +42,14 @@ public class InputManager : MonoBehaviour
         inputBase.Player.LeftClick.canceled += OnLeftClickAction;
         inputBase.Player.Numpads.performed += OnNumpadsAction;
         inputBase.Player.Pickup.performed += OnPickupAction;
+        inputBase.Player.Tab.performed += OnTabAction;
     }
+
+    private void OnTabAction(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        OnTab?.Invoke();
+    }
+
 
     private void OnPickupAction(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
@@ -65,6 +73,9 @@ public class InputManager : MonoBehaviour
         inputBase.Player.RightClick.canceled -= OnRightClickAction;
         inputBase.Player.LeftClick.performed -= OnLeftClickAction;
         inputBase.Player.LeftClick.canceled -= OnLeftClickAction;
+        inputBase.Player.Numpads.performed -= OnNumpadsAction;
+        inputBase.Player.Pickup.performed -= OnPickupAction;
+        inputBase.Player.Tab.performed -= OnTabAction;
     }
 
 }

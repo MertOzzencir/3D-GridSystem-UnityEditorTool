@@ -50,6 +50,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "b08b8454-5f5c-43a2-a40d-20f70808f7af",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -237,6 +246,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pickup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af2b5bbf-d203-4cca-8564-a736fe221050",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
