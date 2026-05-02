@@ -21,7 +21,7 @@ public class Trigger : Placeable, IInteractable, ICarryable
     {
         sc = true;
         Transform parent = transform.parent;
-        GridManager.Instance.AddOnGrid(parent.position + parent.forward, Size, this, out sc);
+        AddOnGrid(parent.position + parent.forward, out sc);
         if (sc)
             c.enabled = true;
         else
@@ -43,7 +43,7 @@ public class Trigger : Placeable, IInteractable, ICarryable
     public void Interact()
     {
         Debug.Log("Interacted with Trigger");
-        foreach (var a in GridManager.Instance.GetPlaceableInRange(transform.position, Size))
+        foreach (var a in GridManager.Instance.GetPlaceableInRange(GridPosition, Size))
         {
             if (a.Placeable == this) continue;
             Debug.Log("Found Object in area");

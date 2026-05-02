@@ -38,12 +38,19 @@ public class SourceLocalManager : Placeable, ITriggerInput
     private void SpawnDropFromChild(SourceBase child)
     {
         GridManager m = GridManager.Instance;
-        GameObject gridRef = m.GetGridGameObject(m.GetOneFreeGrid(transform.position, Size));
-        Vector3Int freeSpawnPosition = new Vector3Int(Mathf.FloorToInt(gridRef.transform.position.x),
-                                                      Mathf.FloorToInt(gridRef.transform.localScale.y),
-                                                     Mathf.FloorToInt(gridRef.transform.position.z)
-        );
-        Placeable spawnedDrop = Instantiate(child, freeSpawnPosition, Quaternion.identity);
+        GameObject gridRef = m.GetGridGameObject(m.GetOneFreeGrid(GridPosition, Size));
+        if (gridRef != null)
+        {
+            Vector3Int freeSpawnPosition = new Vector3Int(Mathf.FloorToInt(gridRef.transform.position.x),
+                                                          Mathf.FloorToInt(gridRef.transform.localScale.y),
+                                                         Mathf.FloorToInt(gridRef.transform.position.z)
+            );
+            Placeable spawnedDrop = Instantiate(child, freeSpawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("There is no place to spawn drop object");
+        }
     }
 
 

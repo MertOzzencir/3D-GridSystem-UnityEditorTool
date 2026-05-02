@@ -116,7 +116,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        return default;
+        return null;
     }
     public List<GridDictData> GetPlaceableInRange(Vector3 origin, Vector3 size)
     {
@@ -199,6 +199,7 @@ public class GridManager : MonoBehaviour
                 GridDictData currentGrid = GetGridData(pos + new Vector3(x, 0, z));
                 if (currentGrid != null)
                 {
+                    Debug.Log("Delete from" + currentGrid.Grid.name);
                     currentGrid.Placeable = default;
                 }
             }

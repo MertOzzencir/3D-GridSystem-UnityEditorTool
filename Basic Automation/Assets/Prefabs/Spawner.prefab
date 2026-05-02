@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   Size: {x: 1, y: 1}
   spawnContainer: []
-  spawnTimer: 5
+  spawnTimer: 15
 --- !u!65 &2732577417119484547
 BoxCollider:
   m_ObjectHideFlags: 0

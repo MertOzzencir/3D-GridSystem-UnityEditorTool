@@ -5,7 +5,7 @@ public class Spawner : Placeable, ICarryable
 {
     [SerializeField] private SourceLocalManager[] spawnContainer;
     [SerializeField] private float spawnTimer;
-    private Dictionary<GameObject, SourceLocalManager> spawnObject = new Dictionary<GameObject, SourceLocalManager>();
+    private Dictionary<GridDictData, SourceLocalManager> spawnObject = new Dictionary<GridDictData, SourceLocalManager>();
     private Collider c;
 
     public override void Start()
@@ -28,7 +28,7 @@ public class Spawner : Placeable, ICarryable
     {
         sc = true;
         Transform parent = transform.parent;
-        GridManager.Instance.AddOnGrid(parent.position + parent.forward, Size, this, out sc);
+        AddOnGrid(parent.position + parent.forward, out sc);
         if (sc)
         {
             c.enabled = true;
@@ -63,20 +63,20 @@ public class Spawner : Placeable, ICarryable
     {
         foreach (var a in spawnObject)
         {
-            if (GridManager.Instance.GetGridData(a.Key.transform.position).Placeable == null)
-                Instantiate(a.Value, a.Key.transform.position, Quaternion.identity);
+            if (GridManager.Instance.GetGridData(a.Key.Grid.transform.position).Placeable == null)
+                Instantiate(a.Value, a.Key.Grid.transform.position, Quaternion.identity);
         }
     }
 
     private void FindPlaceToSources()
     {
-        List<GridDictData> gridsArounds = GridManager.Instance.GetGridsInRange(transform.position, Size);
+        List<GridDictData> gridsArounds = GridManager.Instance.GetGridsInRange(GridPosition, Size);
         foreach (var a in gridsArounds)
         {
             if (a.Placeable == null)
             {
                 int randomIndex = Random.Range(0, spawnContainer.Length);
-                spawnObject.Add(a.Grid, spawnContainer[randomIndex]);
+                spawnObject.Add(a, spawnContainer[randomIndex]);
             }
         }
     }

@@ -43,5 +43,9 @@ public class InventoryUIManager : MonoBehaviour
             if (slot.SourceOnSlot == null) return slot;
         return null;
     }
+    void OnDestroy()
+    {
+        InputManager.OnTab -= OpenInventory;
+    }
 
 }

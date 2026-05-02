@@ -3,20 +3,24 @@ using UnityEngine;
 public abstract class Placeable : MonoBehaviour
 {
     public Vector2 Size;
-
+    public Vector3Int GridPosition { get; private set; }
 
     public virtual void Start()
     {
-        AddOnGrid();
-    }
-    public void AddOnGrid()
-    {
-        GridManager.Instance.AddOnGrid(transform.position, Size, this, out bool s);
+        AddOnGrid(transform.position, out bool s);
         if (!s)
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+    }
+    public void AddOnGrid(Vector3 addPosition, out bool s)
+    {
+        GridManager.Instance.AddOnGrid(addPosition, Size, this, out s);
+        if (s)
+            GridPosition = GridManager.Instance.SnappedPosition(addPosition);
     }
     public void DeleteOnGrid()
     {
-        GridManager.Instance.DeleteOnGrid(transform.position, Size);
+        GridManager.Instance.DeleteOnGrid(GridPosition, Size);
+        GridPosition = default;
     }
+
 }

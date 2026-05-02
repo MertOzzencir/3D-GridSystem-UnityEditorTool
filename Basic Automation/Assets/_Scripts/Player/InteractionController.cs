@@ -125,6 +125,13 @@ public class InteractionController : MonoBehaviour
         InputManager.OnRightClick -= ReadyToInteract;
         InputManager.OnPickup -= Pickup;
     }
+    void OnDestroy()
+    {
+        InputManager.OnLeftClick -= Interact;
+        InputManager.OnRightClick -= ReadyToInteract;
+        InputManager.OnPickup -= Pickup;
+        CarryableEvents.OnCarryable -= CarryObject;
+    }
 }
 public enum InteractState
 {
