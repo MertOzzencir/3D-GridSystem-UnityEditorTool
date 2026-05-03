@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SourceLocalManager : Placeable, ITriggerInput
 {
+    [SerializeField] private ParticleSystem leafParticle;
     public event Action<Animator, string> OnChildAnimation;
     List<Destructable> childDestructables;
     private void Awake()
@@ -26,6 +27,8 @@ public class SourceLocalManager : Placeable, ITriggerInput
         _childHealth -= 1;
         child.SetHealth(_childHealth);
         OnChildAnimation?.Invoke(child.GetAnimator(), child.CurrentAnimationName(0));
+        leafParticle.gameObject.SetActive(true);
+        leafParticle.Play();
         if (_childHealth <= 0)
         {
             childDestructables.Remove(child);

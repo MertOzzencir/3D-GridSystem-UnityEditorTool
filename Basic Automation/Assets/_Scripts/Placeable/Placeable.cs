@@ -7,15 +7,21 @@ public abstract class Placeable : MonoBehaviour
 
     public virtual void Start()
     {
-        AddOnGrid(transform.position, out bool s);
-        if (!s)
+        AddOnGrid(transform.position, out GridDictData s);
+        if (s == null)
             Destroy(gameObject);
     }
-    public void AddOnGrid(Vector3 addPosition, out bool s)
+    public void AddOnGrid(Vector3 addPosition, out GridDictData currentGrid)
     {
-        GridManager.Instance.AddOnGrid(addPosition, Size, this, out s);
-        if (s)
-            GridPosition = GridManager.Instance.SnappedPosition(addPosition);
+        currentGrid = GridManager.Instance.AddOnGrid(addPosition, Size, this);
+        if (currentGrid != null)
+            GridPosition = GridManager.Instance.SnappedPosition(currentGrid.Grid.transform.position);
+    }
+    public void AddOnGridWithMouse(out GridDictData currentGrid)
+    {
+        currentGrid = GridManager.Instance.AddOnGridWithMousePosition(Size, this);
+        if (currentGrid != null)
+            GridPosition = GridManager.Instance.SnappedPosition(currentGrid.Grid.transform.position);
     }
     public void DeleteOnGrid()
     {

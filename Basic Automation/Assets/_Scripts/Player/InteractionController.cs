@@ -19,18 +19,28 @@ public class InteractionController : MonoBehaviour
         movementController = GetComponent<PlayerLocomotionController>();
         CarryableEvents.OnCarryable += CarryObject;
     }
-
+    void Update()
+    {
+        if (currentCarryable != null)
+            currentCarryable.UpdateMain();
+    }
     private void CarryObject(ICarryable t)
     {
-        bool sc = true;
+        GridDictData sc = null;
         if (currentCarryable != null)
         {
             currentCarryable.Drop(out sc);
         }
-        if (sc)
+        if (sc == null)
             currentCarryable = t;
 
         currentCarryable.GetTransform().parent = pickupTransform;
+    }
+    private void RotateCarryable()
+    {
+        if (currentCarryable == null) return;
+
+        currentCarryable.Rotate();
     }
 
     private void ReadyToInteract(bool state)
@@ -77,8 +87,8 @@ public class InteractionController : MonoBehaviour
         {
             if (currentCarryable != null)
             {
-                currentCarryable.Drop(out bool sc);
-                if (sc)
+                currentCarryable.Drop(out GridDictData sc);
+                if (sc != null)
                 {
                     currentCarryable = null;
                 }
@@ -116,6 +126,7 @@ public class InteractionController : MonoBehaviour
         InputManager.OnLeftClick += Interact;
         InputManager.OnRightClick += ReadyToInteract;
         InputManager.OnPickup += Pickup;
+        InputManager.OnRotation += RotateCarryable;
     }
 
 
@@ -124,14 +135,16 @@ public class InteractionController : MonoBehaviour
         InputManager.OnLeftClick -= Interact;
         InputManager.OnRightClick -= ReadyToInteract;
         InputManager.OnPickup -= Pickup;
+        InputManager.OnRotation -= RotateCarryable;
     }
     void OnDestroy()
     {
         InputManager.OnLeftClick -= Interact;
         InputManager.OnRightClick -= ReadyToInteract;
         InputManager.OnPickup -= Pickup;
-        CarryableEvents.OnCarryable -= CarryObject;
+        InputManager.OnRotation -= RotateCarryable;
     }
+
 }
 public enum InteractState
 {

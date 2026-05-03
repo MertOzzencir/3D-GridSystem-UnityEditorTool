@@ -1,62 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : Placeable, ICarryable
+public class Spawner : CarryablePlaceable
 {
     [SerializeField] private SourceLocalManager[] spawnContainer;
     [SerializeField] private float spawnTimer;
     private Dictionary<GridDictData, SourceLocalManager> spawnObject = new Dictionary<GridDictData, SourceLocalManager>();
-    private Collider c;
 
     public override void Start()
     {
         base.Start();
-        c = GetComponent<Collider>();
         FindPlaceToSources();
         StartSpawning();
     }
-    public void Carry()
+
+    public override void Carry()
     {
         StopSpawning();
-        c.enabled = false;
-        DeleteOnGrid();
-        CarryableEvents.Invoke(this);
-        OnCarryDrop();
+        base.Carry();
     }
 
-    public void Drop(out bool sc)
+    public override void Drop(out GridDictData sc)
     {
-        sc = true;
-        Transform parent = transform.parent;
-        AddOnGrid(parent.position + parent.forward, out sc);
-        if (sc)
+        base.Drop(out sc);
+        if (sc != null)
         {
-            c.enabled = true;
             FindPlaceToSources();
             StartSpawning();
         }
-        else
-            OnCarryDrop();
     }
 
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-    private void OnCarryDrop()
-    {
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-    }
     private void StartSpawning()
     {
         InvokeRepeating("SpawnSource", 1, spawnTimer);
     }
+
     private void StopSpawning()
     {
         CancelInvoke("SpawnSource");
         spawnObject.Clear();
-
     }
 
     private void SpawnSource()
@@ -89,6 +71,4 @@ public class Spawner : Placeable, ICarryable
             Debug.Log(a.Key + "" + a.Value);
         }
     }
-
-
 }

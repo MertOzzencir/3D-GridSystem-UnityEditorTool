@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using System.IO;
+using UnityEngine.InputSystem;
 
 public class GridManager : MonoBehaviour
 {
@@ -118,7 +120,20 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
-    public List<GridDictData> GetPlaceableInRange(Vector3 origin, Vector3 size)
+    public Placeable GetOnePlaceableInGrid(Vector3 position)
+    {
+        Vector3Int snapped = SnappedPosition(position);
+        GridDictData grid = GetGridData(snapped);
+        if (grid != null)
+        {
+            if (grid.Placeable != null)
+            {
+                return grid.Placeable;
+            }
+        }
+        return null;
+    }
+    public List<GridDictData> GetPlaceablesInRange(Vector3 origin, Vector3 size)
     {
         Vector3Int snapped = SnappedPosition(origin);
         List<GridDictData> tempGridDictData = new List<GridDictData>();
@@ -154,9 +169,9 @@ public class GridManager : MonoBehaviour
         }
         return tempGridDictData;
     }
-    public bool AddOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject, out bool success)
+    public GridDictData AddOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject)
     {
-        success = true;
+        bool success = true;
         List<GridDictData> temp = new List<GridDictData>();
         for (int z = 0; z < size.y; z++)
         {
@@ -176,19 +191,33 @@ public class GridManager : MonoBehaviour
         if (success)
         {
             int i = 0;
+            GridDictData mainGrid = null;
             foreach (var a in temp)
             {
                 if (i == 0)
                 {
+                    mainGrid = a;
                     placeableObject.transform.position = WorldPositionFromGrid(a.Grid);
                     placeableObject.transform.parent = a.Grid.transform;
                     placeableObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
                 a.Placeable = placeableObject;
             }
+            return mainGrid;
         }
 
-        return success;
+        return null;
+    }
+    public GridDictData AddOnGridWithMousePosition(Vector2 size, Placeable placeableObject)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
+        {
+            
+            return AddOnGrid(hit.point, size, placeableObject);
+        }
+        return null;
     }
     public void DeleteOnGrid(Vector3 pos, Vector3 size)
     {
@@ -225,7 +254,7 @@ public class GridManager : MonoBehaviour
     public Vector3 WorldPositionFromGrid(GameObject grid)
     {
         Vector3 snapped = SnappedPosition(grid.transform.position);
-        return snapped + new Vector3(0, grid.transform.localScale.y, 0);
+        return snapped + new Vector3(0, grid.transform.GetComponent<Collider>().bounds.max.y, 0);
     }
 
     IEnumerator GridVerticalOffSetAnimation(Transform grid, Vector3 aimPosition)
