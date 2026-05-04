@@ -1,36 +1,38 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GridRotationManager
 {
-    public CarryableDirection direction;
-
-    public void Initialize()
+    public CarryableDirection Direction;
+    public Vector3 defaultRotation;
+    public void Initialize(Transform defaultRot)
     {
-        direction = CarryableDirection.Vector3Forward;
+        Direction = CarryableDirection.Vector3Forward;
+        defaultRotation = defaultRot.eulerAngles;
     }
     public void HandleRotate()
     {
-        direction = (CarryableDirection)(((int)direction + 1) % Enum.GetValues(typeof(CarryableDirection)).Length);
+        Direction = (CarryableDirection)(((int)Direction + 1) % Enum.GetValues(typeof(CarryableDirection)).Length);
     }
-    public Vector3 GetRotation()
+    public Vector3 GetRotation(Transform t)
     {
-        switch (direction)
+        switch (Direction)
         {
             case CarryableDirection.Vector3Forward:
-                return new Vector3(0, 0, 0);
+                return new Vector3(0, 0, 0) + defaultRotation;
             case CarryableDirection.Vector3Right:
-                return new Vector3(0, 90, 0);
+                return new Vector3(0, 90, 0) + defaultRotation;
             case CarryableDirection.Vector3Back:
-                return new Vector3(0, 180, 0);
+                return new Vector3(0, 180, 0) + defaultRotation;
             case CarryableDirection.Vector3Left:
-                return new Vector3(0, 270, 0);
+                return new Vector3(0, 270, 0) + defaultRotation;
         }
         return Vector3.zero;
     }
     public Vector3 GetDirection()
     {
-        switch (direction)
+        switch (Direction)
         {
             case CarryableDirection.Vector3Forward:
                 return Vector3.forward;

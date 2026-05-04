@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(VerticalMovementController), typeof(HorizontalMovementController), typeof(RotationController))]
 public class PlayerLocomotionController : MonoBehaviour
@@ -31,6 +32,17 @@ public class PlayerLocomotionController : MonoBehaviour
 
     void Update()
     {
+        if (!IsHorizontalMovement())
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
+            {
+                Vector3 direction = hit.point - transform.position;
+                direction.y = 0;
+                upRight = Quaternion.LookRotation(direction).normalized;
+            }
+            return;
+        }
         Vector3 forward = cam.transform.forward;
         forward.y = 0;
         Vector3 right = cam.transform.right;

@@ -103,7 +103,7 @@ public class GridManager : MonoBehaviour
     //         );
     //     }
     // }
-    public GridDictData GetOneFreeGrid(Vector3 origin, Vector3 size)
+    public GridDictData GetOneGridInRange(Vector3 origin, Vector3 size)
     {
         Vector3Int snapped = SnappedPosition(origin);
         for (int z = 0; z < size.y + 2; z++)
@@ -118,6 +118,14 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+        return null;
+    }
+    public GridDictData GetOneGridWithPosition(Vector3 pos)
+    {
+        Vector3Int snapped = SnappedPosition(pos);
+        GridDictData grid = GetGridData(snapped);
+        if (grid != null)
+            return grid;
         return null;
     }
     public Placeable GetOnePlaceableInGrid(Vector3 position)
@@ -214,7 +222,7 @@ public class GridManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
         {
-            
+
             return AddOnGrid(hit.point, size, placeableObject);
         }
         return null;

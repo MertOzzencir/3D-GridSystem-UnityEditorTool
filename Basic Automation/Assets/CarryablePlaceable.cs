@@ -11,7 +11,7 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     {
         c = GetComponent<Collider>();
         RotationManager = new GridRotationManager();
-        RotationManager.Initialize();
+        RotationManager.Initialize(Visual.GetChild(0));
     }
 
     public virtual void Carry()
@@ -37,7 +37,7 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public virtual void Rotate()
     {
         RotationManager.HandleRotate();
-        Visual.GetChild(0).transform.localEulerAngles = RotationManager.GetRotation();
+        Visual.GetChild(0).transform.localEulerAngles = RotationManager.GetRotation(Visual.GetChild(0));
     }
 
     public Transform GetTransform() => transform;

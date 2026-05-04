@@ -113,7 +113,7 @@ public class InteractionController : MonoBehaviour
             {
                 Vector3 lookDirection = (interact.GetTransform().position - transform.position).normalized;
                 lookDirection.y = 0;
-                if (Vector3.Dot(transform.forward, lookDirection) > .2f)
+                if (Vector3.Dot(transform.forward, lookDirection) > 0f)
                 {
                     interact.Interact();
                 }

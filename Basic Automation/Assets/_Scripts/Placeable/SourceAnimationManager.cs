@@ -6,10 +6,10 @@ public class SourceAnimationManager : MonoBehaviour
     void Awake()
     {
         baseManager = GetComponent<SourceLocalManager>();
-        baseManager.OnChildAnimation += PlayAnimation;
+        baseManager.OnChildAnimation += PlayTriggerAnimation;
     }
 
-    private void PlayAnimation(Animator destructable, string animationname)
+    private void PlayTriggerAnimation(Animator destructable, string animationname)
     {
         destructable.SetTrigger(animationname);
     }

@@ -41,7 +41,7 @@ public class SourceLocalManager : Placeable, ITriggerInput
     private void SpawnDropFromChild(SourceBase child)
     {
         GridManager m = GridManager.Instance;
-        GameObject gridRef = m.GetGridGameObject(m.GetOneFreeGrid(GridPosition, Size));
+        GameObject gridRef = m.GetGridGameObject(m.GetOneGridInRange(GridPosition, Size));
         if (gridRef != null)
         {
             Vector3Int freeSpawnPosition = new Vector3Int(Mathf.FloorToInt(gridRef.transform.position.x),

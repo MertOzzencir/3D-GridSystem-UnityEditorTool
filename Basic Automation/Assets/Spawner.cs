@@ -6,12 +6,16 @@ public class Spawner : CarryablePlaceable
     [SerializeField] private SourceLocalManager[] spawnContainer;
     [SerializeField] private float spawnTimer;
     private Dictionary<GridDictData, SourceLocalManager> spawnObject = new Dictionary<GridDictData, SourceLocalManager>();
-
+    private SpawnerAnimationManager animManager;
+    private GlobalAnimationTrigger animTrigger;
     public override void Start()
     {
         base.Start();
+        animTrigger = GetComponentInChildren<GlobalAnimationTrigger>();
+        animManager = GetComponent<SpawnerAnimationManager>();
         FindPlaceToSources();
         StartSpawning();
+        animTrigger.OnAnimationTrigger += Spawn;
     }
 
     public override void Carry()
@@ -32,16 +36,28 @@ public class Spawner : CarryablePlaceable
 
     private void StartSpawning()
     {
-        InvokeRepeating("SpawnSource", 1, spawnTimer);
+        InvokeRepeating("TryToSpawn", 1, spawnTimer);
     }
 
     private void StopSpawning()
     {
-        CancelInvoke("SpawnSource");
+        CancelInvoke("TryToSpawn");
         spawnObject.Clear();
     }
 
-    private void SpawnSource()
+    private void TryToSpawn()
+    {
+        foreach (var a in spawnObject)
+        {
+            if (GridManager.Instance.GetGridData(a.Key.Grid.transform.position).Placeable == null)
+            {
+                animManager.HitAnimation();
+                break;
+            }
+        }
+    }
+
+    private void Spawn()
     {
         foreach (var a in spawnObject)
         {
@@ -52,15 +68,17 @@ public class Spawner : CarryablePlaceable
 
     private void FindPlaceToSources()
     {
-        List<GridDictData> gridsArounds = GridManager.Instance.GetGridsInRange(GridPosition, Size);
-        foreach (var a in gridsArounds)
+        GridDictData gridsArounds = GridManager.Instance.GetOneGridWithPosition(GridPosition + RotationManager.GetDirection());
+        if (gridsArounds != null)
         {
-            if (a.Placeable == null)
+
+            if (gridsArounds.Placeable == null)
             {
                 int randomIndex = Random.Range(0, spawnContainer.Length);
-                spawnObject.Add(a, spawnContainer[randomIndex]);
+                spawnObject.Add(gridsArounds, spawnContainer[randomIndex]);
             }
         }
+
     }
 
     [ContextMenu("Show Dict")]
