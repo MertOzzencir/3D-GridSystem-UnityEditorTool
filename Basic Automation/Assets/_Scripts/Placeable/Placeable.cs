@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class Placeable : MonoBehaviour
 {
     public Vector2 Size;
-    public Vector3Int GridPosition { get; private set; }
+    public Vector3Int GridPosition { get; set; }
 
     public virtual void Start()
     {
@@ -11,21 +11,21 @@ public abstract class Placeable : MonoBehaviour
         if (s == null)
             Destroy(gameObject);
     }
-    public void AddOnGrid(Vector3 addPosition, out GridDictData currentGrid)
+    public virtual void AddOnGrid(Vector3 addPosition, out GridDictData currentGrid)
     {
-        currentGrid = GridManager.Instance.AddOnGrid(addPosition, Size, this);
+        currentGrid = GridManager.Instance.AddPlaceableOnGrid(addPosition, Size, this);
         if (currentGrid != null)
             GridPosition = GridManager.Instance.SnappedPosition(currentGrid.Grid.transform.position);
     }
-    public void AddOnGridWithMouse(out GridDictData currentGrid)
+    public virtual void AddOnGridWithMouse(out GridDictData currentGrid)
     {
-        currentGrid = GridManager.Instance.AddOnGridWithMousePosition(Size, this);
+        currentGrid = GridManager.Instance.AddPlaceableOnGridWithMousePosition(Size, this);
         if (currentGrid != null)
             GridPosition = GridManager.Instance.SnappedPosition(currentGrid.Grid.transform.position);
     }
-    public void DeleteOnGrid()
+    public virtual void DeleteOnGrid()
     {
-        GridManager.Instance.DeleteOnGrid(GridPosition, Size);
+        GridManager.Instance.DeletePlaceableOnGrid(GridPosition, Size);
         GridPosition = default;
     }
 

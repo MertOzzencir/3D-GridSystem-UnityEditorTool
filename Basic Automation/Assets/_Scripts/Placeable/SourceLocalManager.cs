@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SourceLocalManager : Placeable, ITriggerInput
+public class SourceLocalManager : Placeable, ITriggerOutput
 {
     [SerializeField] private ParticleSystem leafParticle;
     public event Action<Animator, string> OnChildAnimation;
@@ -13,7 +13,7 @@ public class SourceLocalManager : Placeable, ITriggerInput
 
     }
 
-    public void GetSignal()
+    public void ProcessSignal()
     {
         if (childDestructables.Count > 0)
         {
@@ -66,4 +66,6 @@ public class SourceLocalManager : Placeable, ITriggerInput
             Destroy(gameObject);
         }
     }
+
+
 }

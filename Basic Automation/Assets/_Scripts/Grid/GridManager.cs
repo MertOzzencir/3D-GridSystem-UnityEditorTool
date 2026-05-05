@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
-using System.IO;
 using UnityEngine.InputSystem;
 
 public class GridManager : MonoBehaviour
@@ -103,6 +102,14 @@ public class GridManager : MonoBehaviour
     //         );
     //     }
     // }
+    public GridDictData GetOneGridWithPosition(Vector3 pos)
+    {
+        Vector3Int snapped = SnappedPosition(pos);
+        GridDictData grid = GetGridData(snapped);
+        if (grid != null)
+            return grid;
+        return null;
+    }
     public GridDictData GetOneGridInRange(Vector3 origin, Vector3 size)
     {
         Vector3Int snapped = SnappedPosition(origin);
@@ -119,45 +126,6 @@ public class GridManager : MonoBehaviour
             }
         }
         return null;
-    }
-    public GridDictData GetOneGridWithPosition(Vector3 pos)
-    {
-        Vector3Int snapped = SnappedPosition(pos);
-        GridDictData grid = GetGridData(snapped);
-        if (grid != null)
-            return grid;
-        return null;
-    }
-    public Placeable GetOnePlaceableInGrid(Vector3 position)
-    {
-        Vector3Int snapped = SnappedPosition(position);
-        GridDictData grid = GetGridData(snapped);
-        if (grid != null)
-        {
-            if (grid.Placeable != null)
-            {
-                return grid.Placeable;
-            }
-        }
-        return null;
-    }
-    public List<GridDictData> GetPlaceablesInRange(Vector3 origin, Vector3 size)
-    {
-        Vector3Int snapped = SnappedPosition(origin);
-        List<GridDictData> tempGridDictData = new List<GridDictData>();
-        for (int z = 0; z < size.y + 2; z++)
-        {
-            for (int x = 0; x < size.x + 2; x++)
-            {
-                Vector3Int currentPos = snapped + new Vector3Int(-1 + x, 0, -1 + z);
-                GridDictData currentGrid = GetGridData(currentPos);
-                if (currentGrid != null && currentGrid.Placeable != null)
-                {
-                    tempGridDictData.Add(currentGrid);
-                }
-            }
-        }
-        return tempGridDictData;
     }
     public List<GridDictData> GetGridsInRange(Vector3 origin, Vector3 size)
     {
@@ -177,7 +145,54 @@ public class GridManager : MonoBehaviour
         }
         return tempGridDictData;
     }
-    public GridDictData AddOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject)
+
+    public Placeable GetOnePlaceableInGrid(Vector3 position)
+    {
+        Vector3Int snapped = SnappedPosition(position);
+        GridDictData grid = GetGridData(snapped);
+        if (grid != null)
+        {
+            if (grid.Placeable != null)
+            {
+                return grid.Placeable;
+            }
+        }
+        return null;
+    }
+    public MachineBlueprintBase GetOneMachineInGrid(Vector3 position)
+    {
+        Vector3Int snapped = SnappedPosition(position);
+        GridDictData grid = GetGridData(snapped);
+        if (grid != null)
+        {
+            if (grid.Machine != null)
+            {
+                return grid.Machine;
+            }
+        }
+        return null;
+    }
+    public List<GridDictData> GetPlaceableFreeGridsInRange(Vector3 origin, Vector3 size)
+
+    {
+        Vector3Int snapped = SnappedPosition(origin);
+        List<GridDictData> tempGridDictData = new List<GridDictData>();
+        for (int z = 0; z < size.y + 2; z++)
+        {
+            for (int x = 0; x < size.x + 2; x++)
+            {
+                Vector3Int currentPos = snapped + new Vector3Int(-1 + x, 0, -1 + z);
+                GridDictData currentGrid = GetGridData(currentPos);
+                if (currentGrid != null && currentGrid.Placeable != null)
+                {
+                    tempGridDictData.Add(currentGrid);
+                }
+            }
+        }
+        return tempGridDictData;
+    }
+
+    public GridDictData AddPlaceableOnGrid(Vector3 gridPos, Vector2 size, Placeable placeableObject)
     {
         bool success = true;
         List<GridDictData> temp = new List<GridDictData>();
@@ -216,18 +231,66 @@ public class GridManager : MonoBehaviour
 
         return null;
     }
-    public GridDictData AddOnGridWithMousePosition(Vector2 size, Placeable placeableObject)
+    public GridDictData AddMachineOnGrid(Vector3 gridPos, Vector2 size, MachineBlueprintBase machineObject)
+    {
+        bool success = true;
+        List<GridDictData> temp = new List<GridDictData>();
+        for (int z = 0; z < size.y; z++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                GridDictData grid = GetGridData(gridPos + new Vector3(x, 0, z));
+                if (grid != null && grid.Machine == null)
+                {
+                    temp.Add(grid);
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+        }
+        if (success)
+        {
+            int i = 0;
+            GridDictData mainGrid = null;
+            foreach (var a in temp)
+            {
+                if (i == 0)
+                {
+                    mainGrid = a;
+                    machineObject.transform.position = WorldPositionFromGrid(a.Grid);
+                    machineObject.transform.parent = a.Grid.transform;
+                    machineObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                }
+                a.Machine = machineObject;
+            }
+            return mainGrid;
+        }
+
+        return null;
+    }
+    public GridDictData AddPlaceableOnGridWithMousePosition(Vector2 size, Placeable placeableObject)
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
         {
 
-            return AddOnGrid(hit.point, size, placeableObject);
+            return AddPlaceableOnGrid(hit.point, size, placeableObject);
         }
         return null;
     }
-    public void DeleteOnGrid(Vector3 pos, Vector3 size)
+    public GridDictData AddMachineOnGridWithMousePosition(Vector2 size, MachineBlueprintBase machine)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
+            return AddMachineOnGrid(hit.point, size, machine);
+
+        return null;
+    }
+    public void DeletePlaceableOnGrid(Vector3 pos, Vector3 size)
     {
         for (int z = 0; z < size.y; z++)
         {
@@ -237,6 +300,37 @@ public class GridManager : MonoBehaviour
                 if (currentGrid != null)
                 {
                     Debug.Log("Delete from" + currentGrid.Grid.name);
+                    currentGrid.Placeable = default;
+                }
+            }
+        }
+    }
+    public void DeleteMachineOnGrid(Vector3 pos, Vector3 size)
+    {
+        for (int z = 0; z < size.y; z++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                GridDictData currentGrid = GetGridData(pos + new Vector3(x, 0, z));
+                if (currentGrid != null)
+                {
+                    Debug.Log("Delete from" + currentGrid.Grid.name);
+                    currentGrid.Machine = default;
+                }
+            }
+        }
+    }
+    public void ResetGrid(Vector3 pos, Vector3 size)
+    {
+        for (int z = 0; z < size.y; z++)
+        {
+            for (int x = 0; x < size.x; x++)
+            {
+                GridDictData currentGrid = GetGridData(pos + new Vector3(x, 0, z));
+                if (currentGrid != null)
+                {
+                    Debug.Log("Delete from" + currentGrid.Grid.name);
+                    currentGrid.Machine = default;
                     currentGrid.Placeable = default;
                 }
             }
@@ -291,4 +385,5 @@ public class GridDictData
 {
     public GameObject Grid;
     public Placeable Placeable;
+    public MachineBlueprintBase Machine;
 }
