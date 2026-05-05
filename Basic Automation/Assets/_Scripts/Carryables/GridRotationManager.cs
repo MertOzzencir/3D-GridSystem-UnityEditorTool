@@ -8,7 +8,7 @@ public class GridRotationManager
     public Vector3 defaultRotation;
     public void Initialize(Transform defaultRot)
     {
-        Direction = CarryableDirection.Vector3Forward;
+        ResetRotation();
         defaultRotation = defaultRot.eulerAngles;
     }
     public void HandleRotate()
@@ -44,5 +44,9 @@ public class GridRotationManager
                 return Vector3.left;
         }
         return Vector3.zero;
+    }
+    public void ResetRotation()
+    {
+        Direction = CarryableDirection.Vector3Forward;
     }
 }

@@ -78,7 +78,7 @@ public class InteractionController : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit) && currentCarryable == null)
         {
-            if (hit.transform.TryGetComponent(out ICarryable carryable))
+            if (hit.transform.TryGetComponent(out CarryablePlaceable carryable))
             {
                 carryable.Carry();
             }

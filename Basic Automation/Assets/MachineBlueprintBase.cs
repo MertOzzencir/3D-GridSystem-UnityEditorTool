@@ -1,7 +1,39 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public abstract class MachineBlueprintBase : CarryablePlaceable, ITriggerInput
 {
+    private MachineSlots[] slots;
+
+    public override void Start()
+    {
+        base.Start();
+        slots = GetComponentsInChildren<MachineSlots>();
+
+    }
+    public override void Drop(out GridDictData sc)
+    {
+        base.Drop(out sc);
+        foreach (var a in slots)
+        {
+            if (a.GetTool() != null)
+                a.ToolUpdateGridPosition(GridPosition);
+        }
+    }
+    public void AddToolOnSlot(MachineTools t, out bool suc)
+    {
+        suc = false;
+        foreach (var a in slots)
+        {
+            if (a.GetTool() == null)
+            {
+                a.SetupTool(t, this);
+                suc = true;
+                break;
+            }
+        }
+    }
     public override void AddOnGrid(Vector3 addPosition, out GridDictData currentGrid)
     {
         currentGrid = GridManager.Instance.AddMachineOnGrid(addPosition, Size, this);
@@ -20,10 +52,15 @@ public abstract class MachineBlueprintBase : CarryablePlaceable, ITriggerInput
         GridPosition = default;
     }
 
-    public void GetSignal()
+    public virtual void GetSignal()
     {
-        Placeable aim = GridManager.Instance.GetOnePlaceableInGrid(GridPosition);
-        if (aim == null) return;
-        if (aim.TryGetComponent(out ITriggerOutput output)) output.ProcessSignal();
+        foreach (var a in slots)
+        {
+            if (a.GetTool() != null)
+            {
+                a.UseTool();
+            }
+        }
+
     }
 }

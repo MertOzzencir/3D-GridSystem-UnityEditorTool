@@ -276,7 +276,6 @@ public class GridManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
         {
-
             return AddPlaceableOnGrid(hit.point, size, placeableObject);
         }
         return null;

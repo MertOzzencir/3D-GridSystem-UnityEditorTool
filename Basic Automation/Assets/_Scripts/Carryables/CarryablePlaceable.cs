@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class CarryablePlaceable : Placeable, ICarryable
@@ -25,6 +27,11 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public virtual void Drop(out GridDictData sc)
     {
         AddOnGridWithMouse(out sc);
+        OnGridDrop(sc);
+    }
+
+    public void OnGridDrop(GridDictData sc)
+    {
         if (sc != null)
         {
             c.enabled = true;
@@ -42,6 +49,10 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
 
     public Transform GetTransform() => transform;
 
+    public void ResetRotation()
+    {
+        StartCoroutine(RotationCorrectionFromUpdateMain());
+    }
     protected virtual void OnCarryDrop()
     {
         transform.localPosition = Vector3.zero;
@@ -52,5 +63,17 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public virtual void UpdateMain()
     {
         Visual.rotation = Quaternion.Lerp(Visual.rotation, Quaternion.LookRotation(Vector3.forward), 32 * Time.deltaTime);
+    }
+
+    IEnumerator RotationCorrectionFromUpdateMain()
+    {
+        yield return new WaitForNextFrameUnit();
+        RotationManager.ResetRotation();
+        Visual.localEulerAngles = Vector3.zero;
+        Visual.GetChild(0).transform.localEulerAngles = RotationManager.GetRotation(Visual.GetChild(0));
+    }
+    public Transform GetVisual()
+    {
+        return Visual;
     }
 }
