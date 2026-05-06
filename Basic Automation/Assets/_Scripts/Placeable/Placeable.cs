@@ -28,5 +28,9 @@ public abstract class Placeable : MonoBehaviour
         GridManager.Instance.DeletePlaceableOnGrid(GridPosition, Size);
         GridPosition = default;
     }
+    public virtual void AlternativeCarry()
+    {
+
+    }
 
 }

@@ -52,7 +52,6 @@ MonoBehaviour:
   spawnContainer:
   - {fileID: 5882391161792282175, guid: 3cb7b2255cc7aa24082912472d8c92b4, type: 3}
   - {fileID: 7597514702929798920, guid: 3af1a686cf2206a40b10f1ead838a04d, type: 3}
-  - {fileID: 692990413769580707, guid: 95ff56573c4ee0a49b46ed52d5087bf8, type: 3}
   spawnTimer: 15
 --- !u!65 &2732577417119484547
 BoxCollider:

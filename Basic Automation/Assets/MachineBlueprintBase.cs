@@ -1,16 +1,33 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public abstract class MachineBlueprintBase : CarryablePlaceable, ITriggerInput
 {
     private MachineSlots[] slots;
+    private Coroutine toolLogicC;
 
     public override void Start()
     {
         base.Start();
         slots = GetComponentsInChildren<MachineSlots>();
 
+    }
+    public override void Carry()
+    {
+        foreach (var a in slots)
+        {
+            if (a.GetTool() != null)
+            {
+                a.GetTool().CarryFromMachine();
+                a.RemoveTool();
+                return;
+            }
+        }
+        base.Carry();
+    }
+    public override void AlternativeCarry()
+    {
+        base.Carry();
     }
     public override void Drop(out GridDictData sc)
     {
@@ -54,13 +71,29 @@ public abstract class MachineBlueprintBase : CarryablePlaceable, ITriggerInput
 
     public virtual void GetSignal()
     {
-        foreach (var a in slots)
-        {
-            if (a.GetTool() != null)
-            {
-                a.UseTool();
-            }
-        }
+        if (toolLogicC != null) return;
 
+        toolLogicC = StartCoroutine(HandleTools());
+    }
+    private IEnumerator HandleTools()
+    {
+        bool firstEnter = true;
+        MachineSlots lastUsedTool = null;
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].GetTool() == null) continue;
+
+            if (firstEnter)
+            {
+                slots[i].UseTool();
+                lastUsedTool = slots[i];
+                firstEnter = false;
+                continue;
+            }
+            yield return new WaitForSeconds(lastUsedTool.ToolTimer());
+            slots[i].UseTool();
+            lastUsedTool = slots[i];
+        }
+        toolLogicC = null;
     }
 }

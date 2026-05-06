@@ -8,12 +8,13 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public Transform Visual => visual;
     public GridRotationManager RotationManager { get; set; }
     protected Collider c;
-
+    protected Vector3 visualSavedPosition;
     protected virtual void Awake()
     {
         c = GetComponent<Collider>();
         RotationManager = new GridRotationManager();
         RotationManager.Initialize(Visual.GetChild(0));
+        visualSavedPosition = Visual.transform.localPosition;
     }
 
     public virtual void Carry()

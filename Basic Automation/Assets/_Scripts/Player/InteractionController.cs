@@ -1,6 +1,7 @@
 using System;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InteractionController : MonoBehaviour
 {
@@ -75,12 +76,30 @@ public class InteractionController : MonoBehaviour
 
     private void Pickup()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit) && currentCarryable == null)
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Grid")) && currentCarryable == null)
         {
-            if (hit.transform.TryGetComponent(out CarryablePlaceable carryable))
+            GridDictData grid = GridManager.Instance.GetGridData(hit.point);
+            if (grid == null) return;
+            if (grid.Placeable != null)
             {
-                carryable.Carry();
+                if (grid.Placeable.TryGetComponent(out CarryablePlaceable carryable))
+                {
+                    carryable.Carry();
+                    return;
+                }
+            }
+            if (grid.Machine != null)
+            {
+                if (grid.Machine.TryGetComponent(out CarryablePlaceable c))
+                {
+                    if (currentState == InteractState.InteractReady)
+                    {
+                        c.AlternativeCarry();
+                        return;
+                    }
+                    c.Carry();
+                }
             }
         }
         else

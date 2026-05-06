@@ -1,14 +1,33 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public abstract class MachineTools : CarryablePlaceable
 {
+    [SerializeField] private float setTimer;
+    [SerializeField] private string toolMainAnimName;
     private MachineBlueprintBase machineBase;
-
+    private ToolAnimationManager animatorManager;
     public abstract void ToolLogic();
+    protected override void Awake()
+    {
+        base.Awake();
+        animatorManager = GetComponent<ToolAnimationManager>();
+    }
     public void Setup(MachineBlueprintBase m)
     {
         machineBase = m;
+    }
+    public void CarryFromMachine()
+    {
+        c.enabled = false;
+        CarryableEvents.Invoke(this);
+        OnCarryDrop();
+        Visual.localPosition = visualSavedPosition;
+    }
+    public void UseTool()
+    {
+        StartCoroutine(ToolLogicExectuer());
     }
     public override void Drop(out GridDictData sc)
     {
@@ -34,5 +53,21 @@ public abstract class MachineTools : CarryablePlaceable
     public MachineBlueprintBase GetBase()
     {
         return machineBase;
+    }
+    public float CooldownTimer()
+    {
+        return setTimer;
+    }
+    public IEnumerator ToolLogicExectuer()
+    {
+        float timer = 0;
+        animatorManager.PlayAnimation(toolMainAnimName, true);
+        while (timer < setTimer)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        ToolLogic();
+        animatorManager.PlayAnimation(toolMainAnimName, false);
     }
 }
