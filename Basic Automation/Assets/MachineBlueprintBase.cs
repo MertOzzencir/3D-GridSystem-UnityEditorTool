@@ -69,9 +69,15 @@ public abstract class MachineBlueprintBase : CarryablePlaceable, ITriggerInput
         GridPosition = default;
     }
 
-    public virtual void GetSignal()
+    public virtual void GetSignal(out bool sc)
     {
-        if (toolLogicC != null) return;
+        sc = true;
+        if (toolLogicC != null)
+        {
+            sc = false;
+            return;
+        }
+
 
         toolLogicC = StartCoroutine(HandleTools());
     }

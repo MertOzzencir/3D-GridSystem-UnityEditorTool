@@ -457,21 +457,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2718635571221889725, guid: 1243d0ee3126f7144ab26e5f8e6e540b, type: 3}
-      propertyPath: stopAction
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718635571221889725, guid: 1243d0ee3126f7144ab26e5f8e6e540b, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 2911047887577302330, guid: 1243d0ee3126f7144ab26e5f8e6e540b, type: 3}
       propertyPath: m_Name
       value: Particle System
-      objectReference: {fileID: 0}
-    - target: {fileID: 2911047887577302330, guid: 1243d0ee3126f7144ab26e5f8e6e540b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

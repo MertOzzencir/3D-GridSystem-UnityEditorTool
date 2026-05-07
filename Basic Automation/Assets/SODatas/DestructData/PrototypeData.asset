@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428328f072246d64497e55be3498f325, type: 3}
   m_Name: PrototypeData
   m_EditorClassIdentifier: Assembly-CSharp::DestructSO
-  Health: 3
+  Health: 4
   XPAmount: 1
   DropGameObject: {fileID: 3607412098215929322, guid: fb36a48c354775b4ebeb11cde159a6c3, type: 3}
-  IsWeakPoint: 0

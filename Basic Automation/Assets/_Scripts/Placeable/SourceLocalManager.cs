@@ -63,6 +63,9 @@ public class SourceLocalManager : Placeable, ITriggerOutput
         if (childDestructables.Count <= 0)
         {
             DeleteOnGrid();
+            leafParticle.transform.parent = null;
+            var main = leafParticle.main;
+            main.stopAction = ParticleSystemStopAction.Destroy;
             Destroy(gameObject);
         }
     }

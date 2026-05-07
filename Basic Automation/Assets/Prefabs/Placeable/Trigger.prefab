@@ -737,3 +737,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Trigger
   Size: {x: 1, y: 1}
   visual: {fileID: 6047840506043653103}
+  electricVisuals:
+  - {fileID: 949760141444338991}
+  - {fileID: 8088792204731112595}
+  - {fileID: 8215566291305184518}
+  - {fileID: 4775853013404292866}
+  - {fileID: 4071551682386956236}

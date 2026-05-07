@@ -3,5 +3,5 @@
 public interface ITriggerInput
 {
 
-    public void GetSignal();
+    public void GetSignal(out bool success);
 }
