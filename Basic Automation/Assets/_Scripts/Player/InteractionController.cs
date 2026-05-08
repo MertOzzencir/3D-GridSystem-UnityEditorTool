@@ -101,6 +101,18 @@ public class InteractionController : MonoBehaviour
                     c.Carry();
                 }
             }
+
+            if (grid.Placeable != null)
+            {
+                if (grid.Placeable.TryGetComponent(out Placeable c))
+                {
+                    if (currentState == InteractState.InteractReady)
+                    {
+                        c.AlternativeCarry();
+                        return;
+                    }
+                }
+            }
         }
         else
         {

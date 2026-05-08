@@ -1,6 +1,8 @@
-using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.InputSystem;
 
 public class Trigger : CarryablePlaceable, IInteractable
 {
@@ -26,7 +28,25 @@ public class Trigger : CarryablePlaceable, IInteractable
             }
         }
     }
-
+    public override void Drop(out GridDictData sc)
+    {
+        sc = null;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, LayerMask.GetMask("Grid")))
+        {
+            sc = GridManager.Instance.GetGridData(hit.point);
+            if (sc == null) return;
+            if (sc.Placeable == null)
+            {
+                base.Drop(out sc);
+                return;
+            }
+            if (sc.Placeable.TryGetComponent(out ElectricGenerator generator))
+            {
+                generator.ChargeTrigger(this);
+            }
+        }
+    }
     private void ElectricVisualHandle()
     {
         for (int i = 0; i < electricVisuals.Length; i++)
@@ -37,5 +57,20 @@ public class Trigger : CarryablePlaceable, IInteractable
                 break;
             }
         }
+    }
+    public void ChargeSelf()
+    {
+        for (int i = electricVisuals.Length - 1; i >= 0; i--)
+        {
+            if (electricVisuals[i].activeSelf == false)
+            {
+                electricVisuals[i].SetActive(true);
+                break;
+            }
+        }
+    }
+    public GameObject[] ReturnElectricAmount()
+    {
+        return electricVisuals;
     }
 }

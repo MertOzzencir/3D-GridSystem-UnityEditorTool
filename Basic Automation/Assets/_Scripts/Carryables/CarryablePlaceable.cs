@@ -54,7 +54,7 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     {
         StartCoroutine(RotationCorrectionFromUpdateMain());
     }
-    protected virtual void OnCarryDrop()
+    public virtual void OnCarryDrop()
     {
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
