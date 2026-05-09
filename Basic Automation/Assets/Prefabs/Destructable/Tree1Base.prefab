@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2697966844869099528}
   - component: {fileID: 6651548667717626209}
   - component: {fileID: 5882391161792282175}
-  - component: {fileID: 1832126919760312377}
+  - component: {fileID: -502410357087021103}
   m_Layer: 7
   m_Name: Tree1Base
   m_TagString: Untagged
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DestructableLocalManager
   Size: {x: 1, y: 1}
   leafParticle: {fileID: 1790610777535580640}
---- !u!114 &1832126919760312377
+--- !u!114 &-502410357087021103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,9 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 349748246410834961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd3643f21d1dd447be0a19af21223e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 76828a6b0ff005745ab5b2fb25d8776a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestructableAnimationManager
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalAnimationManager
+  anim: {fileID: 4524891102992924581}
 --- !u!1 &2026355540876263761
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +347,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 120fd23923ae1ad4b95f4279e8bd3724, type: 2}
   animationNames:
   - hit
+  deathTimer: 0.4
 --- !u!1 &7787506570863298346
 GameObject:
   m_ObjectHideFlags: 0

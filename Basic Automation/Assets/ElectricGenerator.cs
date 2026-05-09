@@ -3,8 +3,8 @@ using UnityEngine.Rendering;
 
 public class ElectricGenerator : Placeable
 {
-    private Trigger currentTrigger;
-    public void ChargeTrigger(Trigger t)
+    private Chargeable currentTrigger;
+    public void ChargeTrigger(Chargeable t)
     {
         if (currentTrigger != null) return;
         currentTrigger = t;
@@ -28,13 +28,7 @@ public class ElectricGenerator : Placeable
     public void ChargeObject()
     {
         if (currentTrigger == null) return;
-        for (int i = currentTrigger.ReturnElectricAmount().Length - 1; i >= 0; i--)
-        {
-            if (!currentTrigger.ReturnElectricAmount()[i].activeSelf)
-            {
-                currentTrigger.ReturnElectricAmount()[i].SetActive(true);
-                break;
-            }
-        }
+        currentTrigger.ChargeSelf();
+    
     }
 }

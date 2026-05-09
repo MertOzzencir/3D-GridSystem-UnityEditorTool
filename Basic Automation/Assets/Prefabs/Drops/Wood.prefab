@@ -48,6 +48,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DropBase
   Size: {x: 1, y: 1}
   data: {fileID: 11400000, guid: 06b5d41902eb2ad4786dfe14e98e70a0, type: 2}
+  visual: {fileID: 8973346414818586963}
+  yOffset:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2.6551282
+      outSlope: 2.6551282
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.52545166
+      value: 1.3951416
+      inSlope: -0.21627009
+      outSlope: -0.21627009
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.98773193
+      value: -0.032226562
+      inSlope: -3.0876684
+      outSlope: -3.0876684
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  duration: 0.32
 --- !u!65 &2057229692796877375
 BoxCollider:
   m_ObjectHideFlags: 0

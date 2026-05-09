@@ -11,6 +11,7 @@ public abstract class Placeable : MonoBehaviour
         if (s == null)
             Destroy(gameObject);
     }
+
     public virtual void AddOnGrid(Vector3 addPosition, out GridDictData currentGrid)
     {
         currentGrid = GridManager.Instance.AddPlaceableOnGrid(addPosition, Size, this);
@@ -31,6 +32,10 @@ public abstract class Placeable : MonoBehaviour
     public virtual void AlternativeCarry()
     {
 
+    }
+    public virtual Transform ReturnVisual()
+    {
+        return null;
     }
 
 }

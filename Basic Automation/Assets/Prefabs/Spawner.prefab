@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1570425182851130082}
   - component: {fileID: 9174119271389968593}
   - component: {fileID: 2732577417119484547}
-  - component: {fileID: 6527150882735052527}
+  - component: {fileID: 5455761658870394734}
   m_Layer: 7
   m_Name: Spawner
   m_TagString: Untagged
@@ -52,7 +52,7 @@ MonoBehaviour:
   spawnContainer:
   - {fileID: 5882391161792282175, guid: 3cb7b2255cc7aa24082912472d8c92b4, type: 3}
   - {fileID: 7597514702929798920, guid: 3af1a686cf2206a40b10f1ead838a04d, type: 3}
-  spawnTimer: 15
+  spawnTimer: 3
 --- !u!65 &2732577417119484547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68,13 +68,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &6527150882735052527
+--- !u!114 &5455761658870394734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,9 +83,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 903576165571472449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63389e400493edd43806d66831cec10e, type: 3}
+  m_Script: {fileID: 11500000, guid: 76828a6b0ff005745ab5b2fb25d8776a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalAnimationManager
   anim: {fileID: 4090469612389829237}
 --- !u!1 &1017747808792854051
 GameObject:

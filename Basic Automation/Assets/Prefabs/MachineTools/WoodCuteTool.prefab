@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 2595527381207562628}
   - component: {fileID: 5194533849037981305}
   - component: {fileID: 71384354160177971}
-  - component: {fileID: 7484300075638895316}
+  - component: {fileID: 7332655928086524567}
   m_Layer: 0
   m_Name: WoodCuteTool
   m_TagString: Untagged
@@ -208,6 +208,7 @@ MonoBehaviour:
   visual: {fileID: 3789962670477064919}
   setTimer: 1
   toolMainAnimName: hit
+  tempParticle: {fileID: 8478369336785716872}
 --- !u!65 &71384354160177971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -229,7 +230,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5990896, y: 1, z: 0.5472013}
   m_Center: {x: 0.53608954, y: 0.5, z: 0.47931498}
---- !u!114 &7484300075638895316
+--- !u!114 &7332655928086524567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,9 +239,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306715803901399923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49706ae2000e6714e8eca1a760be5476, type: 3}
+  m_Script: {fileID: 11500000, guid: 76828a6b0ff005745ab5b2fb25d8776a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalAnimationManager
+  anim: {fileID: 4748564516735814079}
 --- !u!1 &1396224588361967378
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +845,7 @@ Transform:
   - {fileID: 6559516822647640171}
   - {fileID: 833375643309389841}
   - {fileID: 5635503756601830029}
+  - {fileID: 9130291464326008080}
   m_Father: {fileID: 3789962670477064919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4748564516735814079
@@ -1517,3 +1520,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8328965822859659533}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1875625513821293442
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3024446377558535702}
+    m_Modifications:
+    - target: {fileID: 5533933460236541224, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_Name
+      value: WoodCuterParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533933460236541224, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.066
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+--- !u!198 &8478369336785716872 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8047572488937737482, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+  m_PrefabInstance: {fileID: 1875625513821293442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9130291464326008080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7256073888031082130, guid: 3334216ac42d8104397ccc43f7f96896, type: 3}
+  m_PrefabInstance: {fileID: 1875625513821293442}
+  m_PrefabAsset: {fileID: 0}

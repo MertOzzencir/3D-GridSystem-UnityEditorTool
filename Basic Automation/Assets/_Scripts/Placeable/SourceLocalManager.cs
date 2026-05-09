@@ -1,15 +1,18 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SourceLocalManager : Placeable, ITriggerOutput
 {
     [SerializeField] private ParticleSystem leafParticle;
-    public event Action<Animator, string> OnChildAnimation;
     List<Destructable> childDestructables;
-    private void Awake()
+    private GlobalAnimationManager animManager;
+    public override void Start()
     {
+        base.Start();
         childDestructables = new List<Destructable>(GetComponentsInChildren<Destructable>());
+        animManager = GetComponent<GlobalAnimationManager>();
 
     }
 
@@ -26,14 +29,14 @@ public class SourceLocalManager : Placeable, ITriggerOutput
         int _childHealth = child.GetHealth();
         _childHealth -= 1;
         child.SetHealth(_childHealth);
-        OnChildAnimation?.Invoke(child.GetAnimator(), child.CurrentAnimationName(0));
+        animManager.SeperateAnimatorTriggerPlay(child.GetAnimator(), child.CurrentAnimationName(0));
         leafParticle.gameObject.SetActive(true);
         leafParticle.Play();
         if (_childHealth <= 0)
         {
             childDestructables.Remove(child);
             SpawnDropFromChild(child.GetData().DropGameObject);
-            Destroy(child.gameObject);
+            child.OnDeath();
             DestroySelfCheck();
         }
     }
@@ -48,7 +51,10 @@ public class SourceLocalManager : Placeable, ITriggerOutput
                                                           Mathf.FloorToInt(gridRef.transform.localScale.y),
                                                          Mathf.FloorToInt(gridRef.transform.position.z)
             );
-            Placeable spawnedDrop = Instantiate(child, freeSpawnPosition, Quaternion.identity);
+            SourceBase spawnedDrop = Instantiate(child, freeSpawnPosition, Quaternion.identity);
+            Transform dropVisual = spawnedDrop.ReturnVisual();
+            dropVisual.position = transform.position + new Vector3(0.5f, 0.0f, 0.5f);
+            spawnedDrop.SpawnAnimation();
         }
         else
         {

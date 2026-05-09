@@ -4,10 +4,10 @@ using UnityEngine;
 public class GlobalAnimationTrigger : MonoBehaviour
 {
 
-    public event Action OnAnimationTrigger;
-    public void TriggerAnimation()
+    public event Action<string> OnAnimationTrigger;
+    public void TriggerAnimation(string animname)
     {
-        OnAnimationTrigger?.Invoke();
+        OnAnimationTrigger?.Invoke(animname);
     }
 
 }

@@ -72,6 +72,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 120fd23923ae1ad4b95f4279e8bd3724, type: 2}
   animationNames:
   - hit
+  deathTimer: 0.4
 --- !u!1 &438604238066253105
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +243,7 @@ GameObject:
   - component: {fileID: 2881812416150677682}
   - component: {fileID: 3661370239880419093}
   - component: {fileID: 7597514702929798920}
-  - component: {fileID: -6292304473643394258}
+  - component: {fileID: 481410395555716924}
   m_Layer: 7
   m_Name: Tree2Base
   m_TagString: Untagged
@@ -302,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DestructableLocalManager
   Size: {x: 1, y: 1}
   leafParticle: {fileID: 705320686349836284}
---- !u!114 &-6292304473643394258
+--- !u!114 &481410395555716924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,9 +312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6019604961080868766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd3643f21d1dd447be0a19af21223e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 76828a6b0ff005745ab5b2fb25d8776a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestructableAnimationManager
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalAnimationManager
+  anim: {fileID: 6204188536978240356}
 --- !u!1 &9140683732446894824
 GameObject:
   m_ObjectHideFlags: 0

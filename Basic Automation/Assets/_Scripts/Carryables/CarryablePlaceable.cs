@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,16 +10,18 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public GridRotationManager RotationManager { get; set; }
     protected Collider c;
     protected Vector3 visualSavedPosition;
-    protected virtual void Awake()
+
+    public virtual void Awake()
     {
         c = GetComponent<Collider>();
         RotationManager = new GridRotationManager();
-        RotationManager.Initialize(Visual.GetChild(0));
+        RotationManager.Initialize(Visual);
         visualSavedPosition = Visual.transform.localPosition;
     }
 
     public virtual void Carry()
     {
+
         c.enabled = false;
         DeleteOnGrid();
         CarryableEvents.Invoke(this);
@@ -36,7 +39,7 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
         if (sc != null)
         {
             c.enabled = true;
-            Visual.eulerAngles = Vector3.zero;
+            Visual.localEulerAngles = RotationManager.GetRotation(Visual);
         }
         else
             OnCarryDrop();
@@ -45,7 +48,7 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     public virtual void Rotate()
     {
         RotationManager.HandleRotate();
-        Visual.GetChild(0).transform.localEulerAngles = RotationManager.GetRotation(Visual.GetChild(0));
+        Visual.localEulerAngles = RotationManager.GetRotation(Visual);
     }
 
     public Transform GetTransform() => transform;
@@ -58,12 +61,14 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
     {
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        Visual.eulerAngles = Vector3.zero;
+        //Visual.eulerAngles = Vector3.zero;
     }
 
     public virtual void UpdateMain()
     {
-        Visual.rotation = Quaternion.Lerp(Visual.rotation, Quaternion.LookRotation(Vector3.forward), 32 * Time.deltaTime);
+        if (visual.rotation == Quaternion.LookRotation(RotationManager.GetDirection())) return;
+
+        Visual.rotation = Quaternion.Lerp(Visual.rotation, Quaternion.LookRotation(RotationManager.GetDirection()), 32 * Time.deltaTime);
     }
 
     IEnumerator RotationCorrectionFromUpdateMain()
@@ -71,10 +76,14 @@ public abstract class CarryablePlaceable : Placeable, ICarryable
         yield return new WaitForNextFrameUnit();
         RotationManager.ResetRotation();
         Visual.localEulerAngles = Vector3.zero;
-        Visual.GetChild(0).transform.localEulerAngles = RotationManager.GetRotation(Visual.GetChild(0));
+        Visual.transform.localEulerAngles = RotationManager.GetRotation(Visual);
     }
     public Transform GetVisual()
     {
         return Visual;
+    }
+
+    public virtual void AlternativeCarry(Transform t)
+    {
     }
 }

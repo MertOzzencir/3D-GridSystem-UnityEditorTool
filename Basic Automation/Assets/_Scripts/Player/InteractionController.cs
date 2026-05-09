@@ -12,6 +12,7 @@ public class InteractionController : MonoBehaviour
     private GlobalAnimationTrigger SubscribeAnimation;
     InteractState currentState;
     ICarryable currentCarryable;
+
     void Awake()
     {
         currentState = InteractState.Idle;
@@ -24,6 +25,9 @@ public class InteractionController : MonoBehaviour
     {
         if (currentCarryable != null)
             currentCarryable.UpdateMain();
+        if (currentState == InteractState.InteractReady)
+            movementController.LogicOnInteractReady();
+
     }
     private void CarryObject(ICarryable t)
     {
@@ -130,7 +134,7 @@ public class InteractionController : MonoBehaviour
             }
         }
     }
-    private void OnInteractAnimation()
+    private void OnInteractAnimation(string animname)
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, 3f);
 

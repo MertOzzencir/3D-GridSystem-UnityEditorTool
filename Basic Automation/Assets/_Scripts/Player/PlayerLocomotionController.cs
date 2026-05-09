@@ -101,8 +101,7 @@ public class PlayerLocomotionController : MonoBehaviour
 
     public void HorizontalMovementStateChange(bool state)
     {
-        if (!state)
-            rb.linearVelocity = Vector3.zero;
+
         horizontalController.enabled = state;
     }
     public bool IsHorizontalMovement()
@@ -110,5 +109,9 @@ public class PlayerLocomotionController : MonoBehaviour
         return horizontalController.enabled;
     }
 
+    public void LogicOnInteractReady()
+    {
+        rb.linearVelocity = Vector3.zero;
+    }
 
 }

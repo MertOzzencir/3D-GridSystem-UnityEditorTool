@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MachineSlots : MonoBehaviour
 {
-
     private MachineTools currentTool;
     public void SetupTool(MachineTools tool, MachineBlueprintBase m)
     {

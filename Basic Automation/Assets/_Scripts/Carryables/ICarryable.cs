@@ -5,6 +5,7 @@ using UnityEngine;
 public interface ICarryable
 {
     public void Carry();
+
     public void Drop(out GridDictData sc);
     public Transform Visual { get; }
     public void Rotate();

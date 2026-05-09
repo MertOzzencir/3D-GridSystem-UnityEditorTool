@@ -1,18 +1,17 @@
-using System;
-using JetBrains.Annotations;
 using UnityEngine;
 
-public class WoodCuteTool : MachineTools
+public class RotateTool : MachineTools
 {
     public override void ToolLogic()
     {
         Placeable aim = GridManager.Instance.GetOnePlaceableInGrid(GridPosition);
         if (aim == null) return;
-        if (aim.TryGetComponent(out SourceLocalManager output))
+        if (aim.TryGetComponent(out Spawner output))
         {
-            output.ProcessSignal();
+            output.Rotate();
+            output.SpawnPackage();
         }
-
     }
-   
+
+
 }

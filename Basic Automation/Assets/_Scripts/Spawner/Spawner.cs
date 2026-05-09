@@ -6,15 +6,14 @@ public class Spawner : CarryablePlaceable
     [SerializeField] private SourceLocalManager[] spawnContainer;
     [SerializeField] private float spawnTimer;
     private Dictionary<GridDictData, SourceLocalManager> spawnObject = new Dictionary<GridDictData, SourceLocalManager>();
-    private SpawnerAnimationManager animManager;
+    private GlobalAnimationManager animManager;
     private GlobalAnimationTrigger animTrigger;
     public override void Start()
     {
         base.Start();
         animTrigger = GetComponentInChildren<GlobalAnimationTrigger>();
-        animManager = GetComponent<SpawnerAnimationManager>();
-        FindPlaceToSources();
-        StartSpawning();
+        animManager = GetComponent<GlobalAnimationManager>();
+        SpawnPackage();
         animTrigger.OnAnimationTrigger += Spawn;
     }
 
@@ -22,6 +21,12 @@ public class Spawner : CarryablePlaceable
     {
         StopSpawning();
         base.Carry();
+    }
+    public void SpawnPackage()
+    {
+        StopSpawning();
+        FindPlaceToSources();
+        StartSpawning();
     }
 
     public override void Drop(out GridDictData sc)
@@ -51,13 +56,13 @@ public class Spawner : CarryablePlaceable
         {
             if (GridManager.Instance.GetGridData(a.Key.Grid.transform.position).Placeable == null)
             {
-                animManager.HitAnimation();
+                animManager.PlayTrigger("hit");
                 break;
             }
         }
     }
 
-    private void Spawn()
+    private void Spawn(string animname)
     {
         foreach (var a in spawnObject)
         {

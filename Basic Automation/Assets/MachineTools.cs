@@ -6,13 +6,15 @@ public abstract class MachineTools : CarryablePlaceable
 {
     [SerializeField] private float setTimer;
     [SerializeField] private string toolMainAnimName;
+    [SerializeField] private ParticleSystem tempParticle;
+
     private MachineBlueprintBase machineBase;
-    private ToolAnimationManager animatorManager;
+    private GlobalAnimationManager animatorManager;
     public abstract void ToolLogic();
-    protected override void Awake()
+    public override void Awake()
     {
         base.Awake();
-        animatorManager = GetComponent<ToolAnimationManager>();
+        animatorManager = GetComponent<GlobalAnimationManager>();
     }
     public void Setup(MachineBlueprintBase m)
     {
@@ -61,13 +63,18 @@ public abstract class MachineTools : CarryablePlaceable
     public IEnumerator ToolLogicExectuer()
     {
         float timer = 0;
-        animatorManager.PlayAnimation(toolMainAnimName, true);
+        animatorManager.PlayBool(toolMainAnimName, true);
+        tempParticle.gameObject.SetActive(true);
+        tempParticle.Play();
         while (timer < setTimer)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+        tempParticle.Stop();
+        tempParticle.gameObject.SetActive(false);
         ToolLogic();
-        animatorManager.PlayAnimation(toolMainAnimName, false);
+        animatorManager.PlayBool(toolMainAnimName, false);
+
     }
 }
