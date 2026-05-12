@@ -225,6 +225,7 @@ public class GridManager : MonoBehaviour
                     placeableObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
                 a.Placeable = placeableObject;
+                i++;
             }
             return mainGrid;
         }
@@ -264,6 +265,7 @@ public class GridManager : MonoBehaviour
                     machineObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 }
                 a.Machine = machineObject;
+                i++;
             }
             return mainGrid;
         }

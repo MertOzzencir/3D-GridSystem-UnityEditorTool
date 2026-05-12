@@ -1,9 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Chargeable : CarryablePlaceable
+public class Chargeable : CarryablePlaceable, IHoverable
 {
     [SerializeField] private GameObject[] electricVisuals;
+    [SerializeField] private Canvas worldCanvas;
 
     public override void Drop(out GridDictData sc)
     {
@@ -57,5 +59,15 @@ public class Chargeable : CarryablePlaceable
     public GameObject[] ReturnElectricAmount()
     {
         return electricVisuals;
+    }
+
+    public void Hover()
+    {
+        worldCanvas.gameObject.SetActive(true);
+    }
+
+    public void UnHover()
+    {
+        worldCanvas.gameObject.SetActive(false);
     }
 }

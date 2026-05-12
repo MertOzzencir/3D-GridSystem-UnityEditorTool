@@ -12,6 +12,7 @@ public class InteractionController : MonoBehaviour
     private GlobalAnimationTrigger SubscribeAnimation;
     InteractState currentState;
     ICarryable currentCarryable;
+    IHoverable hoverable;
 
     void Awake()
     {
@@ -28,6 +29,25 @@ public class InteractionController : MonoBehaviour
         if (currentState == InteractState.InteractReady)
             movementController.LogicOnInteractReady();
 
+        Hover();
+    }
+    private void Hover()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            if (hit.transform.TryGetComponent(out IHoverable hover))
+            {
+                hoverable = hover;
+                hover.Hover();
+            }
+            else if (hoverable != null)
+            {
+                hoverable.UnHover();
+                hoverable = null;
+            }
+        }
+       
     }
     private void CarryObject(ICarryable t)
     {

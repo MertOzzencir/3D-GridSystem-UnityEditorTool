@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Trigger : Chargeable, IInteractable
+public class Trigger : Chargeable
 {
     public void Interact()
     {
