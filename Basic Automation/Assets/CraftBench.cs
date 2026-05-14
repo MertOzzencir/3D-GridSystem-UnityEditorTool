@@ -41,6 +41,7 @@ public class CraftBench : Placeable, IHoverable
             dropVisual.position = transform.position + new Vector3(0.5f, 0.0f, 0.5f);
             if (spawnedDrop != null)
                 spawnedDrop.SpawnAnimation();
+            leftedAmountRef = currentRecipt.Amount;
             Scrool(0);
         }
     }
@@ -63,6 +64,7 @@ public class CraftBench : Placeable, IHoverable
     }
     public void Scrool(int horizontalIndex)
     {
+        Refund();
         int currentIndex = craftRecipts.IndexOf(currentRecipt);
         if (currentIndex + horizontalIndex < craftRecipts.Count && currentIndex + horizontalIndex >= 0)
         {
@@ -99,6 +101,15 @@ public class CraftBench : Placeable, IHoverable
     {
         currentRecipt = current;
         SetUI(currentRecipt);
+    }
+    private void Refund()
+    {
+        int refuntAmount = currentRecipt.Amount - leftedAmountRef;
+        if (refuntAmount == 0) return;
+        for (int i = 0; i < refuntAmount; i++)
+        {
+            InventoryManager.Instance.AddSource(currentRecipt.InputRecipt);
+        }
     }
 }
 
