@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
-public class SourceBase : Placeable, ICollectable
+public class CraftableBase : Placeable, ICollectable
 {
     [SerializeField] private SourcesSO data;
     [SerializeField] private Transform visual;
+    [SerializeField] private float duration;
     [SerializeField] private AnimationCurve yOffset;
-    [SerializeField] private float duration = 0.5f;
 
-    Vector3 localVisual;
+    private Vector3 localVisual;
     void Awake()
     {
         localVisual = visual.localPosition;
@@ -28,6 +26,5 @@ public class SourceBase : Placeable, ICollectable
     {
         StartCoroutine(Animation(visual, localVisual, duration, yOffset));
     }
-
 
 }

@@ -36,6 +36,13 @@ public class InventorySlot : MonoBehaviour
             slotAnim = StartCoroutine(SlotAnimation());
         }
     }
+    public void Reset()
+    {
+        SourceOnSlot = null;
+        sourceAmount.text = "";
+        sourceName.text = "";
+        icon.sprite = default;
+    }
     private IEnumerator SlotAnimation()
     {
         ownImage.color = Color.green;

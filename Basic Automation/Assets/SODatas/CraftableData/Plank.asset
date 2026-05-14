@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 003faba42195d0146b30155d37a71be2, type: 3}
-  m_Name: WoodData
-  m_EditorClassIdentifier: Assembly-CSharp::DropSO
-  SourceName: Wood
-  Icon: {fileID: 1287649992867056945, guid: 6eaa9958d83ec43499e946a21edba283, type: 3}
+  m_Name: Plank
+  m_EditorClassIdentifier: Assembly-CSharp::SourcesSO
+  SourceName: Plank
+  Icon: {fileID: 21300000, guid: a57d0bc93481bd844af3c2236db044f2, type: 3}
+  Prefab: {fileID: 2340358445735143092, guid: 2c781e9f33ede1c4aaaba67bec524ae3, type: 3}
+  XPAmount: 1

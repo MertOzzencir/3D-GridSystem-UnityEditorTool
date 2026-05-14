@@ -35,7 +35,7 @@ public class SourceLocalManager : Placeable, ITriggerOutput
         if (_childHealth <= 0)
         {
             childDestructables.Remove(child);
-            SpawnDropFromChild(child.GetData().DropGameObject);
+            SpawnDropFromChild(child.GetData().Prefab.GetComponent<SourceBase>());
             child.OnDeath();
             DestroySelfCheck();
         }

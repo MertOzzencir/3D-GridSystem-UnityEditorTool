@@ -5,5 +5,7 @@ public class SourcesSO : ScriptableObject
 {
     public string SourceName;
     public Sprite Icon;
+    public GameObject Prefab;
+    public int XPAmount;
 
 }

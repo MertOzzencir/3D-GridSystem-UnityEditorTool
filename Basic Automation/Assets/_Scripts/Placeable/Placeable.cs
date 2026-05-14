@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Placeable : MonoBehaviour
@@ -37,5 +38,24 @@ public abstract class Placeable : MonoBehaviour
     {
         return null;
     }
+    
+    public IEnumerator Animation(Transform visual, Vector3 localVisual, float duration, AnimationCurve yOffset)
+    {
+        Vector3 startPosition = visual.localPosition;
+        float elapsed = 0f;
 
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            float curveValue = yOffset.Evaluate(t);
+
+            Vector3 horizontalPos = Vector3.Lerp(startPosition, localVisual, t);
+
+            visual.localPosition = horizontalPos + Vector3.up * curveValue;
+
+            yield return null;
+        }
+        visual.localPosition = localVisual;
+    }
 }

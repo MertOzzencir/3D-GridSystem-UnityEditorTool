@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-    [SerializeField] private DestructSO data;
+    [SerializeField] private SourcesSO data;
     [SerializeField] private string[] animationNames;
     [SerializeField] private float deathTimer;
-    private int Health;
+    [SerializeField] private int Health;
     private Animator anim;
     void Start()
     {
         anim = GetComponent<Animator>();
-        Health = data.Health;
     }
 
-    public DestructSO GetData()
+    public SourcesSO GetData()
     {
         return data;
     }

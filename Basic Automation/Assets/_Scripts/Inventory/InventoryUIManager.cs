@@ -29,7 +29,12 @@ public class InventoryUIManager : MonoBehaviour
             currentSlot.Add(source, amount.ToString(), source.SourceName, source.Icon);
         }
     }
+    public void RemoveSourceOnUI(SourcesSO s)
+    {
+        InventorySlot c = FindSlotBySource(s);
+        if (c != null) c.Reset();
 
+    }
     private InventorySlot FindSlotBySource(SourcesSO source)
     {
         foreach (var slot in slots)

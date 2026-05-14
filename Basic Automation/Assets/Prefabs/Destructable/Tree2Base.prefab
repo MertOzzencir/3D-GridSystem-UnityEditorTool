@@ -69,10 +69,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d25746a651ccd4593650de120b7e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Destructable
-  data: {fileID: 11400000, guid: 120fd23923ae1ad4b95f4279e8bd3724, type: 2}
+  data: {fileID: 11400000, guid: f73c453cabc53ba4ab7ac167f521b182, type: 2}
   animationNames:
   - hit
   deathTimer: 0.4
+  Health: 1
 --- !u!1 &438604238066253105
 GameObject:
   m_ObjectHideFlags: 0
