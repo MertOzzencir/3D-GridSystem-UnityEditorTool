@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class CraftBench : CraftBenchBase<SourcesSO, SourcesSO>
+public class ToolCraftBench : CraftBenchBase<SourcesSO, MachineToolSO>
 {
     protected override Sprite GetInputIcon(SourcesSO i) => i.Icon;
-    protected override Sprite GetOutputIcon(SourcesSO o) => o.Icon;
+    protected override Sprite GetOutputIcon(MachineToolSO o) => o.Icon;
 
     protected override bool CheckInventory(SourcesSO input)
     {
@@ -17,10 +17,6 @@ public class CraftBench : CraftBenchBase<SourcesSO, SourcesSO>
 
     protected override void SpawnOutput(Vector3Int spawnPos)
     {
-        var spawned = Instantiate(
-            currentRecipt.OutputRecipt.Prefab.GetComponent<CraftableBase>(),
-            spawnPos, Quaternion.identity);
-        spawned.ReturnVisual().position = transform.position + new Vector3(0.5f, 0f, 0.5f);
-        spawned.SpawnAnimation();
+        var tool = Instantiate(currentRecipt.OutputRecipt.Prefab, spawnPos, Quaternion.identity);
     }
 }
