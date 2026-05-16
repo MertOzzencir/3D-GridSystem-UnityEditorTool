@@ -8,7 +8,6 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
     [SerializeField] private Transform player;
-    public GridDataSO gridData;
 
     private Dictionary<Vector3Int, GridDictData> gridDict = new Dictionary<Vector3Int, GridDictData>();
     private GameObject currentGrid;
@@ -22,42 +21,57 @@ public class GridManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-        foreach (var entry in gridData.entries)
+
+
+        // foreach (var entry in gridData.entries)
+        // {
+
+
+        //     string gridName = $"Grid_{entry.position.x}_{entry.position.y}_{entry.position.z}";
+        //     GameObject grid = GameObject.Find(gridName);
+        //     if (grid == null) continue;
+
+        //     GridDictData data = new GridDictData();
+        //     data.Grid = grid;
+        //     gridDict[entry.position] = data;
+
+        //     if (entry.IsFull)
+        //     {
+        //         string placeableName = $"Placeable_{entry.position.x}_{entry.position.z}";
+        //         GameObject placeableObj = GameObject.Find(placeableName);
+        //         Placeable placeableRef = placeableObj.GetComponent<Placeable>();
+        //         data.Placeable = placeableRef;
+        //         if (placeableObj != null)
+        //         {
+        //             for (int z = 0; z < data.Placeable.Size.y; z++)
+        //             {
+        //                 for (int x = 0; x < data.Placeable.Size.x; x++)
+        //                 {
+        //                     if (x == 0 && z == 0) continue;
+        //                     GridDictData nData = new GridDictData();
+        //                     string nName = $"Grid_{entry.position.x + x}_{entry.position.y}_{entry.position.z + z}";
+        //                     GameObject ngrid = GameObject.Find(nName);
+        //                     nData.Grid = ngrid;
+        //                     nData.Placeable = placeableRef;
+        //                     nData.HasChecked = true;
+        //                     gridDict[entry.position + new Vector3Int(x, 0, z)] = nData;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+    }
+    public void RegisterGridsFromIsland(List<GridDatasFromIsland> islandData)
+    {
+        foreach (var entry in islandData)
         {
+            if (gridDict.ContainsKey(entry.Position))
+            {
+                Debug.LogWarning($"Grid çakışması: {entry.Position}");
+                continue;
+            }
 
-
-            string gridName = $"Grid_{entry.position.x}_{entry.position.y}_{entry.position.z}";
-            GameObject grid = GameObject.Find(gridName);
-            if (grid == null) continue;
-
-            GridDictData data = new GridDictData();
-            data.Grid = grid;
-            gridDict[entry.position] = data;
-
-            // if (entry.IsFull)
-            // {
-            //     string placeableName = $"Placeable_{entry.position.x}_{entry.position.z}";
-            //     GameObject placeableObj = GameObject.Find(placeableName);
-            //     Placeable placeableRef = placeableObj.GetComponent<Placeable>();
-            //     data.Placeable = placeableRef;
-            //     if (placeableObj != null)
-            //     {
-            //         for (int z = 0; z < data.Placeable.Size.y; z++)
-            //         {
-            //             for (int x = 0; x < data.Placeable.Size.x; x++)
-            //             {
-            //                 if (x == 0 && z == 0) continue;
-            //                 GridDictData nData = new GridDictData();
-            //                 string nName = $"Grid_{entry.position.x + x}_{entry.position.y}_{entry.position.z + z}";
-            //                 GameObject ngrid = GameObject.Find(nName);
-            //                 nData.Grid = ngrid;
-            //                 nData.Placeable = placeableRef;
-            //                 nData.HasChecked = true;
-            //                 gridDict[entry.position + new Vector3Int(x, 0, z)] = nData;
-            //             }
-            //         }
-            //     }
-            // }
+            gridDict[entry.Position] = new GridDictData { Grid = entry.GridInstance };
         }
     }
 
